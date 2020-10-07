@@ -20,7 +20,7 @@ class PostController extends Controller
      */
     public function index(): ResourceCollection
     {
-        return new PostCollection(Post::with('author:id,name,email')->withCount('visits')->paginate());
+        return new PostCollection(Post::orderBy('position')->with('author:id,name,email')->withCount('visits')->paginate());
     }
 
     /**

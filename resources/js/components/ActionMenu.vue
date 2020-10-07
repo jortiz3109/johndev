@@ -2,7 +2,7 @@
     <div class="buttons is-pulled-right">
         <b-button
             tag="a"
-            :href="showRoute"
+            :href="this.showRoute"
             size="is-small"
             type="is-primary"
             icon-left="eye"
@@ -11,7 +11,7 @@
             outlined />
         <b-button
             tag="a"
-            :href="editRoute"
+            :href="this.editRoute"
             size="is-small"
             type="is-info"
             icon-left="edit"
@@ -19,7 +19,7 @@
             :title="__('common.actions.edit')"
             outlined />
         <b-button
-            @click="confirmDeletion"
+            @click="this.destroy"
             size="is-small"
             type="is-danger"
             icon-left="trash"
@@ -31,42 +31,31 @@
 <script>
 export default {
     props: {
-        showRoute: {
-            type: String,
+        post: {
+            type: Number,
             required: true
         },
-        editRoute: {
-            type: String,
-            required: true
+    },
+    computed: {
+        showRoute: function() {
+            return ['admin', 'posts', this.post].join('/');
         },
-        deleteRoute: {
-            type: String,
-            required: true
+        editRoute: function() {
+            return ['admin', 'posts', this.post, 'edit'].join('/');
         },
-        iconPack: {
-            type: String,
-            default: 'fas'
-        },
-        hasIcon: {
-            type: Boolean,
-            default: false
+        deleteRoute: function() {
+            return ['api', 'admin', 'posts', this.post].join('/');
         },
     },
     methods: {
-        delete() {
-            eventBus.$emit('delete-item', {route: this.deleteRoute});
-        },
-        confirmDeletion() {
-            this.$buefy.dialog.confirm({
+        destroy() {
+            eventBus.$emit('delete-item', {
+                route: this.deleteRoute,
                 title: this.__('posts.messages.delete.title'),
                 message: this.__('posts.messages.delete.message'),
                 confirmText: this.__('posts.messages.delete.confirm'),
                 cancelText: this.__('common.actions.cancel'),
-                type: 'is-danger',
-                hasIcon: this.hasIcon,
-                iconPack: this.iconPack,
-                onConfirm: () => this.delete()
-            })
+            });
         }
     }
 }

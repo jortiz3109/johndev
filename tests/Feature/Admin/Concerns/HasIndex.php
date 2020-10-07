@@ -10,33 +10,33 @@ trait HasIndex
 {
     public function testItReturnTheCorrectView()
     {
-        $this->get(route($this->routeName()))->assertViewIs($this->viewName());
+        $this->get(route($this->route()))->assertViewIs($this->view());
     }
 
     public function testItHasACollection()
     {
-        $response = $this->get(route($this->routeName()));
+        $response = $this->get(route($this->route()));
 
-        $response->assertViewHas($this->collectionName());
+        $response->assertViewHas($this->collection());
     }
 
     public function testItHasAPaginator()
     {
-        $response = $this->get(route($this->routeName()));
+        $response = $this->get(route($this->route()));
 
-        $collection = $this->getDataItem($response, $this->collectionName());
+        $collection = $this->getDataItem($response, $this->collection());
 
         $this->assertInstanceOf(AbstractPaginator::class, $collection);
     }
 
     public function testItHasACollectionOfCorrectModels()
     {
-        $modelName = $this->modelName();
+        $modelName = $this->model();
         $modelName::factory()->create();
 
-        $response = $this->get(route($this->routeName()));
-        $collection = $this->getDataItem($response, $this->collectionName());
+        $response = $this->get(route($this->route()));
+        $collection = $this->getDataItem($response, $this->collection());
 
-        $this->assertInstanceOf($this->modelName(), $collection->first());
+        $this->assertInstanceOf($this->model(), $collection->first());
     }
 }

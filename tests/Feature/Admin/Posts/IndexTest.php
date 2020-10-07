@@ -10,8 +10,23 @@ class IndexTest extends AdminIndexTestCase
 {
     use RefreshDatabase;
 
-    public const ROUTE_NAME = 'admin.posts.index';
-    public const VIEW_NAME = 'admin.posts.index';
-    public const COLLECTION_NAME = 'posts';
-    public const MODEL_NAME = Post::class;
+    protected function route(): string
+    {
+        return 'admin.posts.index';
+    }
+
+    protected function view(): string
+    {
+        return 'admin.posts.index';
+    }
+
+    protected function collection(): string
+    {
+        return 'posts';
+    }
+
+    protected function model(): string
+    {
+        return Post::class;
+    }
 }

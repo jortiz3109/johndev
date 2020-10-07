@@ -25,13 +25,6 @@ class PostCollection extends ResourceCollection
                 'featured' => $post->isFeatured(),
                 'published' => $post->isPublished(),
                 'visits' => $post->visits_count,
-                'meta' => [
-                    'routes' => [
-                        'show' => route('admin.posts.show', $post),
-                        'edit' => route('admin.posts.edit', $post),
-                        'delete' => route('api.admin.posts.destroy', $post)
-                    ]
-                ]
             ];
         })->toArray();
     }

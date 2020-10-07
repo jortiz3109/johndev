@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class PostFactory extends Factory
 {
@@ -24,29 +24,11 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence,
+            'title' => $this->faker->words(3, true),
             'slug' => $this->faker->slug,
-            'summary' => $this->faker->paragraph,
+            'summary' => Str::substr($this->faker->paragraph, 0, 80),
             'body' => $this->faker->realText,
             'user_id' => User::factory(),
         ];
-    }
-
-    public function published(): Factory
-    {
-        return $this->state(function () {
-            return [
-                'published_at' => now(),
-            ];
-        });
-    }
-
-    public function featured(): Factory
-    {
-        return $this->state(function () {
-            return [
-                'featured_at' => now(),
-            ];
-        });
     }
 }

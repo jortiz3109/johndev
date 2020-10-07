@@ -35,9 +35,7 @@
 
         <b-table-column width="150" v-slot="props">
             <action-menu
-                :show-route="props.row.meta.routes.show"
-                :edit-route="props.row.meta.routes.edit"
-                :delete-route="props.row.meta.routes.delete"
+                :post="props.row.id"
             ></action-menu>
         </b-table-column>
 
@@ -84,8 +82,11 @@ export default {
         },
     },
     mounted() {
-        this.loadAsyncData()
+        this.loadAsyncData();
         eventBus.$on('item-deleted-successfully', () => {
+            this.loadAsyncData();
+        });
+        eventBus.$on('item-changed', () => {
             this.loadAsyncData();
         });
     }

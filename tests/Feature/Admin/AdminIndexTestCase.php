@@ -9,18 +9,11 @@ abstract class AdminIndexTestCase extends AdminTestCase
 {
     use HasIndex;
 
-    protected function viewName(): string
-    {
-        return static::VIEW_NAME;
-    }
+    protected abstract function route(): string;
 
-    protected function collectionName(): string
-    {
-        return static::COLLECTION_NAME;
-    }
+    protected abstract function view(): string;
 
-    protected function modelName(): string
-    {
-        return static::MODEL_NAME;
-    }
+    protected abstract function collection(): string;
+
+    protected abstract function model(): string;
 }

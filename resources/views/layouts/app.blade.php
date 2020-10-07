@@ -16,7 +16,7 @@
     @yield('content-top')
     @yield('content')
     @yield('content-bottom')
-    <notification ></notification>
+    <notification />
 </div>
 <footer class="footer has-background-light">
     <div class="content has-text-centered">
