@@ -48,13 +48,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     showRoute: function showRoute() {
-      return ['admin', 'posts', this.post].join('/');
+      return this.webRoute("admin/posts/".concat(this.post));
     },
     editRoute: function editRoute() {
-      return ['admin', 'posts', this.post, 'edit'].join('/');
+      return this.webRoute("admin/posts/".concat(this.post, "/edit"));
     },
     deleteRoute: function deleteRoute() {
-      return ['api', 'admin', 'posts', this.post].join('/');
+      return this.apiRoute("admin/posts/".concat(this.post));
     }
   },
   methods: {
@@ -298,7 +298,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var API_PATH = '/api/admin/posts';
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -315,7 +314,7 @@ var API_PATH = '/api/admin/posts';
 
       var params = ["page=".concat(this.page)].join('&');
       this.loading = true;
-      axios.get("".concat(API_PATH, "?").concat(params)).then(function (_ref) {
+      axios.get(this.apiRoute(['/admin/posts', params].join('?'))).then(function (_ref) {
         var data = _ref.data;
         _this.data = [];
         _this.total = data.meta.total;
@@ -364,7 +363,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var API_PATH = '/api/admin/posts/{POST}/toggle-featured';
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     featured: {
@@ -385,7 +383,7 @@ var API_PATH = '/api/admin/posts/{POST}/toggle-featured';
     toggle: function toggle() {
       var _this = this;
 
-      var route = API_PATH.replace('{POST}', this.post.toString());
+      var route = this.apiRoute("admin/posts/".concat(this.post, "/toggle-featured"));
       axios.post(route).then(function (_ref) {
         var data = _ref.data;
         eventBus.$emit('success-notification-message', data.message);
@@ -411,7 +409,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var API_PATH = '/api/admin/posts/{POST}/toggle-published';
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     published: {
@@ -432,7 +429,7 @@ var API_PATH = '/api/admin/posts/{POST}/toggle-published';
     toggle: function toggle() {
       var _this = this;
 
-      var route = API_PATH.replace('{POST}', this.post.toString());
+      var route = this.apiRoute("admin/posts/".concat(this.post, "/toggle-published"));
       axios.post(route).then(function (_ref) {
         var data = _ref.data;
         eventBus.$emit('success-notification-message', data.message);
@@ -472,7 +469,7 @@ var render = function() {
           "icon-left": "eye",
           "icon-pack": "fas",
           title: _vm.__("common.actions.show"),
-          outlined: ""
+          inverted: ""
         }
       }),
       _vm._v(" "),
@@ -485,7 +482,7 @@ var render = function() {
           "icon-left": "edit",
           "icon-pack": "fas",
           title: _vm.__("common.actions.edit"),
-          outlined: ""
+          inverted: ""
         }
       }),
       _vm._v(" "),
@@ -496,7 +493,7 @@ var render = function() {
           "icon-left": "trash",
           "icon-pack": "fas",
           title: _vm.__("common.actions.delete"),
-          outlined: ""
+          inverted: ""
         },
         on: { click: this.destroy }
       })
@@ -754,6 +751,7 @@ window.axios.interceptors.response.use(function (response) {
   return Promise.reject(error.response); // transform response.response -> response
 });
 Vue.mixin(__webpack_require__(/*! ./mixins/trans */ "./resources/js/mixins/trans.js"));
+Vue.mixin(__webpack_require__(/*! ./mixins/paths */ "./resources/js/mixins/paths.js"));
 
 Vue.component('admin-posts-table', _components_admin_posts_index_AdminPostsTableComponent__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
@@ -788,7 +786,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = window.location.origin;
+window.axios.defaults.baseURL = window._apiPath;
 /**
  * We'll load the Vue JS library. The Progressive JavaScript Framework
  */
@@ -852,7 +850,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-
+  
 )
 
 /* hot reload */
@@ -872,7 +870,7 @@ component.options.__file = "resources/js/components/ActionMenu.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionMenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ActionMenu.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ActionMenu.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionMenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionMenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -920,7 +918,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-
+  
 )
 
 /* hot reload */
@@ -940,7 +938,7 @@ component.options.__file = "resources/js/components/DeleteItemFromBackend.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteItemFromBackend_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DeleteItemFromBackend.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeleteItemFromBackend.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteItemFromBackend_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteItemFromBackend_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -970,7 +968,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-
+  
 )
 
 /* hot reload */
@@ -990,7 +988,7 @@ component.options.__file = "resources/js/components/NotificationComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotificationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./NotificationComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NotificationComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotificationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NotificationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -1021,7 +1019,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-
+  
 )
 
 /* hot reload */
@@ -1041,7 +1039,7 @@ component.options.__file = "resources/js/components/admin/posts/index/AdminPosts
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPostsTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AdminPostsTableComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/posts/index/AdminPostsTableComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPostsTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AdminPostsTableComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -1090,7 +1088,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-
+  
 )
 
 /* hot reload */
@@ -1110,7 +1108,7 @@ component.options.__file = "resources/js/components/admin/posts/index/PostFeatur
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostFeaturedTagComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./PostFeaturedTagComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/posts/index/PostFeaturedTagComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostFeaturedTagComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostFeaturedTagComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -1159,7 +1157,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-
+  
 )
 
 /* hot reload */
@@ -1179,7 +1177,7 @@ component.options.__file = "resources/js/components/admin/posts/index/PostPublis
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostPublishedTagComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./PostPublishedTagComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/posts/index/PostPublishedTagComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostPublishedTagComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostPublishedTagComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -1214,6 +1212,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 window.eventBus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
+
+/***/ }),
+
+/***/ "./resources/js/mixins/paths.js":
+/*!**************************************!*\
+  !*** ./resources/js/mixins/paths.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {
+  methods: {
+    webRoute: function webRoute(path) {
+      return this.mergeRoute(window._sitePath, path);
+    },
+    apiRoute: function apiRoute(path) {
+      return this.mergeRoute(window._apiPath, path);
+    },
+    mergeRoute: function mergeRoute(base, path) {
+      if (path.startsWith('/')) {
+        path = path.slice(1);
+      }
+
+      return [base, path].join('/');
+    }
+  }
+};
 
 /***/ }),
 

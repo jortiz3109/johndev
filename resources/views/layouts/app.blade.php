@@ -26,6 +26,8 @@
 <script>
     window._locale = '{{ app()->getLocale() }}';
     window._translations = {!! cache('translations') !!};
+    window._sitePath = '{{ url('') }}';
+    window._apiPath = '{{ url('/api') }}';
 </script>
 <script src="{{ asset(mix('js/manifest.js')) }}"></script>
 <script src="{{ asset(mix('js/vendor.js')) }}"></script>

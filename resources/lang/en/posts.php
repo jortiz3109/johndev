@@ -7,7 +7,10 @@ return [
     'author' => 'Author',
     'featured' => 'Featured',
     'published' => 'Published',
+    'published_at' => 'Published at',
+    'featured_at' => 'Featured at',
     'visits' => 'Visits',
+    'information' => 'Post information',
     'messages' => [
         'delete' => [
             'title' => 'Deleting post',

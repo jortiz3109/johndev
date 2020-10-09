@@ -14,4 +14,10 @@ class PostController extends Controller
 
         return response()->view('admin.posts.index', compact('posts'));
     }
+
+    public function show(Post $post)
+    {
+        $post->load('categories', 'author:id,name,email');
+        return view('admin.posts.show', compact('post'));
+    }
 }

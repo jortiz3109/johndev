@@ -42,7 +42,6 @@
     </b-table>
 </template>
 <script>
-const API_PATH = '/api/admin/posts';
 export default {
     data() {
         return {
@@ -60,7 +59,7 @@ export default {
             ].join('&');
 
             this.loading = true;
-            axios.get(`${API_PATH}?${params}`)
+            axios.get(this.apiRoute(['/admin/posts', params].join('?')))
                 .then(({data}) => {
                     this.data = []
                     this.total = data.meta.total

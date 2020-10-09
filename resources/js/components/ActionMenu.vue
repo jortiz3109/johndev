@@ -8,7 +8,7 @@
             icon-left="eye"
             icon-pack="fas"
             :title="__('common.actions.show')"
-            outlined />
+            inverted />
         <b-button
             tag="a"
             :href="this.editRoute"
@@ -17,7 +17,7 @@
             icon-left="edit"
             icon-pack="fas"
             :title="__('common.actions.edit')"
-            outlined />
+            inverted />
         <b-button
             @click="this.destroy"
             size="is-small"
@@ -25,7 +25,7 @@
             icon-left="trash"
             icon-pack="fas"
             :title="__('common.actions.delete')"
-            outlined />
+            inverted />
     </div>
 </template>
 <script>
@@ -38,13 +38,13 @@ export default {
     },
     computed: {
         showRoute: function() {
-            return ['admin', 'posts', this.post].join('/');
+            return this.webRoute(`admin/posts/${this.post}`);
         },
         editRoute: function() {
-            return ['admin', 'posts', this.post, 'edit'].join('/');
+            return this.webRoute(`admin/posts/${this.post}/edit`);
         },
         deleteRoute: function() {
-            return ['api', 'admin', 'posts', this.post].join('/');
+            return this.apiRoute(`admin/posts/${this.post}`);
         },
     },
     methods: {

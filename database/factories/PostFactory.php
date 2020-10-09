@@ -27,8 +27,19 @@ class PostFactory extends Factory
             'title' => $this->faker->words(3, true),
             'slug' => $this->faker->slug,
             'summary' => Str::substr($this->faker->paragraph, 0, 80),
-            'body' => $this->faker->realText,
+            'body' => $this->body(),
             'user_id' => User::factory(),
         ];
+    }
+
+    private function body(): string
+    {
+        $body = '';
+        $paragraphs = $this->faker->paragraphs(random_int(5, 50));
+        foreach ($paragraphs as $paragraph) {
+            $body .= "<p>{$paragraph}</p>";
+        }
+
+        return $body;
     }
 }

@@ -13,6 +13,7 @@ window.axios.interceptors.response.use(
 );
 
 Vue.mixin(require('./mixins/trans'));
+Vue.mixin(require('./mixins/paths'));
 
 import AdminPostsTableComponent from "./components/admin/posts/index/AdminPostsTableComponent";
 Vue.component('admin-posts-table', AdminPostsTableComponent);

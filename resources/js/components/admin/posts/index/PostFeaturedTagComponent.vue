@@ -4,7 +4,6 @@
     </span>
 </template>
 <script>
-const API_PATH = '/api/admin/posts/{POST}/toggle-featured'
 export default {
     props: {
         featured: {
@@ -23,8 +22,7 @@ export default {
     },
     methods: {
         toggle() {
-            let route = API_PATH.replace('{POST}', this.post.toString());
-
+            let route = this.apiRoute(`admin/posts/${this.post}/toggle-featured`);
             axios.post(route)
                 .then(({data}) => {
                     eventBus.$emit('success-notification-message', data.message);
