@@ -3,7 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
-./severless
+.severless
 .env
 .env.backup
 .phpunit.result.cache
