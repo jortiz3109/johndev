@@ -1,25 +1,27 @@
 @extends('layouts.admin')
 @section('admin-content-top')
     <x-module-main-bar title="{{ $post->title }}">
-        <div class="level-item">
-            <b-button
-                tag="a"
-                type="is-primary"
-                icon-left="chevron-left"
-                icon-pack="fas"
-                href="{{ route('admin.posts.index') }}">
-                @lang('common.actions.back')
-            </b-button>
-        </div>
-        <div class="level-item">
-            <b-button
-                tag="a"
-                type="is-primary"
-                icon-left="edit"
-                icon-pack="fas"
-                href="{{ route('admin.posts.edit', $post) }}">
-            </b-button>
-        </div>
+        <x-slot name="right">
+            <div class="level-item">
+                <b-button
+                    tag="a"
+                    type="is-primary"
+                    icon-left="chevron-left"
+                    icon-pack="fas"
+                    href="{{ route('admin.posts.index') }}">
+                    @lang('common.actions.back')
+                </b-button>
+            </div>
+            <div class="level-item">
+                <b-button
+                    tag="a"
+                    type="is-primary"
+                    icon-left="edit"
+                    icon-pack="fas"
+                    href="{{ route('admin.posts.edit', $post) }}">
+                </b-button>
+            </div>
+        </x-slot>
     </x-module-main-bar>
 @endsection
 @section('admin-content')

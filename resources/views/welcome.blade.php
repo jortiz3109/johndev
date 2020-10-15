@@ -30,10 +30,24 @@
             </div>
         </div>
     </section>
-    <section class="section">
-        <div class="container">
-            <h2 class="title is-2">Latest blog posts</h2>
-
-        </div>
-    </section>
 @endsection
+@push('footer-top')
+    <div class="hero is-white">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-3">
+                        <div class="content">
+                            <a href="{{ url('') }}" class="is-size-5 has-text-grey-dark">Home</a>
+                        </div>
+                        <div class="content">
+                            <a href="{{ url('blog') }}" class="is-block is-size-4 has-text-grey-dark">Blog</a>
+                            <a href="{{ url('blog') }}" class="is-block is-size-6 has-text-grey-dark">First article</a>
+                            <a href="{{ url('blog') }}" class="is-block is-size-6 has-text-grey-dark">Second article</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush
