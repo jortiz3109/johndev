@@ -7,6 +7,7 @@
                     tag="a"
                     type="is-primary"
                     icon-left="chevron-left"
+                    class="is-fullwidth-mobile"
                     icon-pack="fas"
                     href="{{ route('admin.posts.show', ['post' => $post['id']]) }}">
                     @lang('common.actions.back')
