@@ -1,14 +1,14 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Custom
-@import "custom";
-
 // Variables
 @import 'variables';
 
 // Buefy
 @import "~buefy/src/scss/buefy-build";
+
+// Custom
+@import "custom";
 
 // Font Awesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";

@@ -22,6 +22,18 @@
     border-right: 1px;
 }
 
-.is-border-dashed {
+.has-border-grey {
+    border-color: $grey;
+}
+
+.has-border-grey-darker {
+    border-color: $grey-darker;
+}
+
+.has-border-dashed {
     border-style: dashed;
+}
+
+.has-border-solid {
+    border-style: solid;
 }
