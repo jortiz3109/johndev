@@ -8,6 +8,7 @@ return [
         'edit' => 'Edit',
         'delete' => 'Delete',
         'back' => 'Back',
+        'save' => 'Save',
     ],
     'name' => 'Name',
     'email' => 'Email',
