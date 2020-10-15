@@ -21,7 +21,10 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
+        "@toast-ui/editor": "^2.4.0",
+        "@toast-ui/editor-plugin-code-syntax-highlight": "^1.0.0",
         "buefy": "^0.9.3",
+        "highlight.js": "^10.2.1",
         "vue": "^2.6.12"
     }
 }

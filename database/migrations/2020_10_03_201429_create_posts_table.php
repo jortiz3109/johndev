@@ -18,7 +18,6 @@ class CreatePostsTable extends Migration
             $table->foreignId('user_id')->nullable();
             $table->string('title', 120)->unique();
             $table->string('slug', 120)->unique();
-            $table->string('summary', 254);
             $table->longText('body');
             $table->timestamp('featured_at')->nullable();
             $table->timestamp('published_at')->nullable();

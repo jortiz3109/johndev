@@ -38,13 +38,19 @@ import Editor from '@toast-ui/editor';
 export default {
     data() {
         return {
-            title: null,
-            published: true,
-            featured: false,
+            title: this.post.title,
+            published: this.post.published,
+            featured: this.post.featured,
             errors: [],
             loading: false,
             editor: null,
         };
+    },
+    props: {
+        post: {
+            type: Object,
+            required: true,
+        }
     },
     methods: {
         store() {
@@ -55,7 +61,7 @@ export default {
                 published: this.published,
                 featured: this.featured,
             };
-            axios.post(this.apiRoute('admin/posts'), post)
+            axios.put(this.apiRoute(`admin/posts/${this.post.id}`), post)
                 .then(({data}) => {
                     window.location.href = data.data.links.show;
                 })
@@ -75,6 +81,7 @@ export default {
             el: document.querySelector('#editor'),
             height: 'auto',
             initialEditType: 'markdown',
+            initialValue: this.post.body,
             hideModeSwitch: true,
             usageStatistics: false,
             language: window._locale,

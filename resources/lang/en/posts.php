@@ -3,6 +3,7 @@ return [
     'titles' => [
         'index' => 'Administration of Posts',
         'create' => 'Create new post',
+        'edit' => 'Edit post',
     ],
     'title' => 'Title',
     'author' => 'Author',
