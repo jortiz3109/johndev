@@ -9,28 +9,23 @@ export default {
         }
     },
     props: {
-        iconPack: {
-            type: String,
-            default: 'fas'
-        },
-        hasIcon: {
-            type: Boolean,
-            default: false
-        },
         queue: {
             type: Boolean,
             default: false,
+        },
+        position: {
+            type: String,
+            default: 'is-bottom',
         }
     },
     methods: {
         notify() {
-            this.$buefy.notification.open({
+            this.$buefy.toast.open({
                 message: this.message,
                 type: this.type,
                 duration: this.duration,
-                hasIcon: this.hasIcon,
-                iconPack: this.iconPack,
                 queue: this.queue,
+                position: this.position,
             })
         },
         setDefaultParams() {

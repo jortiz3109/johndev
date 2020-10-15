@@ -9,7 +9,6 @@
         backend-pagination
         :total="total"
         :per-page="perPage"
-
         @page-change="onPageChange"
         aria-next-label="Next page"
         aria-previous-label="Previous page"
@@ -19,7 +18,7 @@
 
         <b-table-column field="title" :label="__('posts.title')" v-slot="props">
             {{ props.row.title }}
-            <div class="tags">
+            <div class="buttons are-small is-pulled-right">
                 <post-featured-tag :post="props.row.id" :featured="props.row.featured"></post-featured-tag>
                 <post-published-tag :post="props.row.id" :published="props.row.published"></post-published-tag>
             </div>
@@ -78,7 +77,7 @@ export default {
         onPageChange(page) {
             this.page = page
             this.loadAsyncData()
-        },
+        }
     },
     mounted() {
         this.loadAsyncData();

@@ -1,7 +1,10 @@
 <template>
-    <span @click="toggle" class="tag is-light" :class="this.featuredStatus ? 'is-success' : 'is-danger'" style="cursor: pointer">
-        <b-icon icon="star" pack="fas" :type="this.featuredStatus ? 'is-success' : 'is-danger'"></b-icon>
-    </span>
+    <b-button
+        @click="toggle"
+        :type="this.featuredStatus ? 'is-success' : 'is-light'"
+        icon-pack="fas"
+        icon-left="star"
+        size="small"></b-button>
 </template>
 <script>
 export default {
@@ -25,8 +28,7 @@ export default {
             let route = this.apiRoute(`admin/posts/${this.post}/toggle-featured`);
             axios.post(route)
                 .then(({data}) => {
-                    eventBus.$emit('success-notification-message', data.message);
-                    this.featuredStatus = data.featured;
+                    this.featuredStatus = data.data.featured;
                 })
         }
     }

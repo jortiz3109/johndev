@@ -1,7 +1,10 @@
 <template>
-    <span @click="toggle" class="tag is-light" :class="this.publishedStatus ? 'is-success' : 'is-danger'" style="cursor: pointer">
-        <b-icon icon="check" pack="fas" :type="this.publishedStatus ? 'is-success' : 'is-danger'"></b-icon>
-    </span>
+    <b-button
+        @click="toggle"
+        :type="this.publishedStatus ? 'is-success' : 'is-light'"
+        icon-pack="fas"
+        icon-left="check"
+        size="small"></b-button>
 </template>
 <script>
 export default {
@@ -26,8 +29,7 @@ export default {
 
             axios.post(route)
                 .then(({data}) => {
-                    eventBus.$emit('success-notification-message', data.message);
-                    this.publishedStatus = data.published;
+                    this.publishedStatus = data.data.published;
                 })
         }
     }
