@@ -11,9 +11,9 @@ class ModuleMainBar extends Component
     /**
      * Create a new component instance.
      *
-     * @return void
+     * @param string $title
      */
-    public function __construct($title)
+    public function __construct(string $title)
     {
         $this->title = $title;
     }

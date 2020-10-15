@@ -6,9 +6,10 @@
                     <h1 class="title">
                         {{ $title }}
                     </h1>
+                    {{ $left ?? ''}}
                 </div>
                 <div class="level-right">
-                    {{ $slot }}
+                    {{ $right ?? ''}}
                 </div>
             </div>
         </div>
