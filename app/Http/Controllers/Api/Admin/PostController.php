@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Actions\Posts\StoreOrUpdatePostAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Posts\StorePostRequest;
+use App\Http\Requests\Posts\UpdatePostRequest;
 use App\Http\Resources\Api\Admin\PostCollection;
+use App\Http\Responses\ApiResponse;
 use App\Models\Post;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Http\Response;
 
 class PostController extends Controller
 {
@@ -20,30 +22,47 @@ class PostController extends Controller
      */
     public function index(): ResourceCollection
     {
-        return new PostCollection(Post::with('author:id,name,email')->withCount('visits')->paginate());
+        return new PostCollection(
+            Post::with('author:id,name,email')
+                ->withCount('visits')
+                ->orderBy('id', 'DESC')
+                ->paginate()
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     * @return Response
+     * @param StorePostRequest $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request): JsonResponse
     {
-        //
+        $post = StoreOrUpdatePostAction::execute($request->validated());
+
+        return ApiResponse::dispatch(trans('Post created'), [
+            'links' => [
+                'show' => route('admin.posts.show', $post)
+            ]
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param int $id
-     * @return Response
+     * @param UpdatePostRequest $request
+     * @param Post $post
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, Post $post): JsonResponse
     {
-        //
+        $post = StoreOrUpdatePostAction::execute($request->validated(), $post);
+
+        return ApiResponse::dispatch(trans('Post updated'), [
+            'links' => [
+                'show' => route('admin.posts.show', $post)
+            ]
+        ]);
     }
 
     /**
@@ -56,7 +75,7 @@ class PostController extends Controller
     public function destroy(Post $post): JsonResponse
     {
         $post->delete();
-        return response()->json(['message' => 'Post deleted successfully']);
+        return ApiResponse::dispatch(trans('Post deleted'));
     }
 
     public function toggleFeatured(Post $post): JsonResponse
@@ -64,12 +83,9 @@ class PostController extends Controller
         $post->toggleFeatured();
         $post->save();
 
-        $response = [
-            'message' => $post->isFeatured() ? trans('Post marked as featured') : trans('Post marked as not featured'),
-            'featured' => $post->isFeatured(),
-        ];
+        $message = $post->isFeatured() ? trans('Post marked as featured') : trans('Post marked as not featured');
 
-        return response()->json($response);
+        return ApiResponse::dispatch($message, ['featured' => $post->isFeatured()]);
     }
 
     public function togglePublished(Post $post): JsonResponse
@@ -77,11 +93,8 @@ class PostController extends Controller
         $post->togglePublished();
         $post->save();
 
-        $response = [
-            'message' => $post->isPublished() ? trans('Post published') : trans('Post unpublished'),
-            'published' => $post->isPublished(),
-        ];
+        $message = $post->isPublished() ? trans('Post published') : trans('Post unpublished');
 
-        return response()->json($response);
+        return ApiResponse::dispatch($message, ['published' => $post->isPublished()]);
     }
 }
