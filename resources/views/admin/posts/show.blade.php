@@ -28,13 +28,9 @@
     @include('admin.posts.show.__categories', ['categories' => $post->categories])
     <div class="columns">
         <div class="column">
-            <div class="content">
-                <p>{{ $post->summary }}</p>
-            </div>
-            <hr>
             <article>
                 <div class="content">
-                    {!! $post->body !!}
+                    {!! $post->parseBody() !!}
                 </div>
             </article>
         </div>

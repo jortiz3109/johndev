@@ -11,6 +11,11 @@
 </head>
 <body class="has-background-light">
 <div id="app">
+    <logout-component>
+        <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+            @csrf
+        </form>
+    </logout-component>
     @include('main-navbar')
     @yield('content-top')
     @yield('content')
@@ -19,19 +24,13 @@
 </div>
 @stack('footer-top')
 <footer class="footer">
-    <div class="container">
-        <div class="columns">
-            <div class="column">
-                <p class="content">
-                    © {{ now()->year }} John Edisson Ortiz, All rights reserved
-                </p>
-            </div>
-            <div class="column">
-                <a href="https://bulma.io" target="_blank" class="is-pulled-right">
-                    <img src="https://bulma.io/images/made-with-bulma--white.png" alt="Made with Bulma" width="128" height="24">
-                </a>
-            </div>
-        </div>
+    <div class="content has-text-centered">
+        <p>
+            © {{ now()->year }} John Edisson Ortiz, All rights reserved
+        </p>
+        <a href="https://bulma.io" target="_blank">
+            <img src="https://bulma.io/images/made-with-bulma--white.png" alt="Made with Bulma" width="128" height="24">
+        </a>
     </div>
 </footer>
 <script>
@@ -39,6 +38,9 @@
     window._translations = {!! cache('translations') !!};
     window._sitePath = '{{ url('') }}';
     window._apiPath = '{{ url('/api') }}';
+    @auth()
+    window._apiToken = '{{ auth()->user()->api_token }}';
+    @endauth
 </script>
 <script src="{{ asset(mix('js/manifest.js')) }}"></script>
 <script src="{{ asset(mix('js/vendor.js')) }}"></script>

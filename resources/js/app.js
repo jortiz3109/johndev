@@ -1,6 +1,7 @@
 require('./bootstrap');
 require('./buefy');
 require('./event-bus');
+require('./highlight');
 
 window.axios.interceptors.response.use(
     function(response) {
@@ -44,6 +45,17 @@ Vue.component('action-menu', ActionMenu);
 import CreatePostForm from "./components/admin/posts/CreatePostForm";
 Vue.component('admin-posts-create', CreatePostForm);
 
+import EditPostForm from "./components/admin/posts/EditPostForm";
+Vue.component('admin-posts-edit', EditPostForm);
+
+import LogoutComponent from "./components/LogoutComponent";
+Vue.component('logout-component', LogoutComponent);
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    mounted() {
+        this.$on('auth:logout', () => {
+            eventBus.$emit('auth:logout');
+        });
+    }
 });

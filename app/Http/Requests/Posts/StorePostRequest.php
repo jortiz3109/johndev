@@ -26,7 +26,6 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title'     => ['required', 'min:5', 'max:120', Rule::unique('posts')],
-            'summary'   => ['required', 'min:20', 'max:254'],
             'body'      => ['required'],
             'published' => ['sometimes', 'boolean'],
             'featured'  => ['sometimes', 'boolean'],

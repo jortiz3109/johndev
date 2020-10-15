@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Helpers\PostBodyHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+use Parsedown;
 
 /**
  * @property string title
@@ -25,6 +28,11 @@ class Post extends Model
         'published_at',
         'featured_at',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function author(): BelongsTo
     {
@@ -62,5 +70,18 @@ class Post extends Model
     public function isPublished(): bool
     {
         return (bool)$this->published_at;
+    }
+
+    public function summary(): string
+    {
+        return PostBodyHelper::summary($this->attributes['body']);
+    }
+
+    public function parseBody(): string
+    {
+        $parseDown = new Parsedown();
+        $parseDown->setSafeMode(true);
+        $parseDown->setMarkupEscaped(true);
+        return $parseDown->text(Str::replaceFirst('=====', '', $this->attributes['body']));
     }
 }

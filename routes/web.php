@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'show']);
 
-Route::as('admin.')->prefix('admin')->group(function () {
+Route::as('admin.')->prefix('admin')->middleware('auth')->group(function () {
     Route::resource('posts', PostController::class)->except(['store', 'update', 'destroy']);
 });

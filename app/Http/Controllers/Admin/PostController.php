@@ -29,6 +29,13 @@ class PostController extends Controller
 
     public function edit(Post $post): View
     {
+        $post = [
+            'id' => $post->getRouteKey(),
+            'title' => $post->title,
+            'body' => $post->body,
+            'published' => $post->isPublished(),
+            'featured' => $post->isFeatured(),
+        ];
         return view('admin.posts.edit', compact('post'));
     }
 }
