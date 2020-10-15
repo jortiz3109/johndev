@@ -17,9 +17,11 @@
                 <b-button
                     tag="a"
                     type="is-primary"
+                    class="is-fullwidth"
                     icon-left="edit"
                     icon-pack="fas"
                     href="{{ route('admin.posts.edit', $post) }}">
+                    @lang('common.actions.edit')
                 </b-button>
             </div>
         </x-slot>
