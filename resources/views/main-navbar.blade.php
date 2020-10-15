@@ -12,7 +12,7 @@
     </template>
     <template slot="end">
         @auth()
-            <b-navbar-dropdown label="{{ auth()->user()->name }}" boxed>
+            <b-navbar-dropdown label="{{ auth()->user()->name }}" boxed collapsible>
                 <b-navbar-item @click="$emit('auth:logout')">
                     @lang('Logout')
                 </b-navbar-item>
