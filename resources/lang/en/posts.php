@@ -1,13 +1,20 @@
 <?php
 return [
     'titles' => [
-        'admin' => 'Administration of Posts'
+        'index' => 'Administration of Posts',
+        'create' => 'Create new post',
     ],
     'title' => 'Title',
     'author' => 'Author',
     'featured' => 'Featured',
     'published' => 'Published',
+    'published_at' => 'Published at',
+    'featured_at' => 'Featured at',
+    'summary' => 'Summary',
+    'body' => 'Body',
     'visits' => 'Visits',
+    'information' => 'Post information',
+    'publication_options' => 'Publication options',
     'messages' => [
         'delete' => [
             'title' => 'Deleting post',

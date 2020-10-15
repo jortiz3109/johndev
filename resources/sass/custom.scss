@@ -1,0 +1,39 @@
+.has-borders {
+    border: 1px;
+}
+
+.has-border-top {
+    border: 0;
+    border-top: 1px;
+}
+
+.has-border-bottom {
+    border: 0;
+    border-bottom: 1px;
+}
+
+.has-border-left {
+    border: 0;
+    border-left: 1px;
+}
+
+.has-border-right {
+    border: 0;
+    border-right: 1px;
+}
+
+.has-border-grey {
+    border-color: $grey;
+}
+
+.has-border-grey-darker {
+    border-color: $grey-darker;
+}
+
+.has-border-dashed {
+    border-style: dashed;
+}
+
+.has-border-solid {
+    border-style: solid;
+}

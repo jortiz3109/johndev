@@ -1,10 +1,12 @@
 <template>
-    <span @click="toggle" class="tag is-light" :class="this.publishedStatus ? 'is-success' : 'is-danger'" style="cursor: pointer">
-        <b-icon icon="check" pack="fas" :type="this.publishedStatus ? 'is-success' : 'is-danger'"></b-icon>
-    </span>
+    <b-button
+        @click="toggle"
+        :type="this.publishedStatus ? 'is-success' : 'is-light'"
+        icon-pack="fas"
+        icon-left="check"
+        size="small"></b-button>
 </template>
 <script>
-const API_PATH = '/api/admin/posts/{POST}/toggle-published'
 export default {
     props: {
         published: {
@@ -23,12 +25,11 @@ export default {
     },
     methods: {
         toggle() {
-            let route = API_PATH.replace('{POST}', this.post.toString());
+            let route = this.apiRoute(`admin/posts/${this.post}/toggle-published`);
 
             axios.post(route)
                 .then(({data}) => {
-                    eventBus.$emit('success-notification-message', data.message);
-                    this.publishedStatus = data.published;
+                    this.publishedStatus = data.data.published;
                 })
         }
     }

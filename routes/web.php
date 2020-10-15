@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 Route::as('admin.')->prefix('admin')->group(function () {
-    Route::resource('posts', PostController::class);
+    Route::resource('posts', PostController::class)->except(['store', 'update', 'destroy']);
 });
