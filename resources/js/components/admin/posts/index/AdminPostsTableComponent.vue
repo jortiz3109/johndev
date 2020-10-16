@@ -29,7 +29,7 @@
         </b-table-column>
 
         <b-table-column field="created_at" width="120" :label="__('common.created_at')" v-slot="props">
-            {{ new Date(props.row.created_at).toLocaleDateString() }}
+            {{ props.row.created_at }}
         </b-table-column>
 
         <b-table-column width="150" v-slot="props">
