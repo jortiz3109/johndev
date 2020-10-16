@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/tests/coverage
 .serverless
 .env
 .env.backup
