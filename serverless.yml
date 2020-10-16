@@ -23,6 +23,10 @@ functions:
         events:
             -   http: 'ANY /'
             -   http: 'ANY /{proxy+}'
+            - schedule:
+                rate: rate(5 minutes)
+                input:
+                  warmer: true
     artisan:
         handler: artisan
         timeout: 120 # in seconds
