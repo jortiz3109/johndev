@@ -6,6 +6,7 @@
                 <b-button
                     tag="a"
                     type="is-primary"
+                    class="is-fullwidth"
                     icon-left="chevron-left"
                     icon-pack="fas"
                     href="{{ route('admin.posts.index') }}">

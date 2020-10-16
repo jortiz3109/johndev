@@ -2,25 +2,25 @@
 
 namespace Tests\Feature\Admin\Posts;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\Admin\Concerns\HasAuthorizationTests;
 use Tests\Feature\Admin\Concerns\HasResponseTests;
 use Tests\TestCase;
 
-class IndexTest extends TestCase
+class CreateTest extends TestCase
 {
     use RefreshDatabase;
-    use HasAuthorizationTests;
     use HasResponseTests;
+    use HasAuthorizationTests;
 
-    protected function viewName(): string
-    {
-        return 'admin.posts.index';
-    }
 
     protected function route(): string
     {
-        return route('admin.posts.index');
+        return route('admin.posts.create');
+    }
+
+    protected function viewName(): string
+    {
+        return 'admin.posts.create';
     }
 }

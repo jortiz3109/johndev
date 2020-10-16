@@ -11,15 +11,16 @@
 </head>
 <body class="has-background-light">
 <div id="app">
+    @include('main-navbar')
+    @yield('content-top')
+    @yield('content')
+    @yield('content-bottom')
     <logout-component>
         <form id="logoutForm" action="{{ route('logout') }}" method="POST">
             @csrf
         </form>
     </logout-component>
-    @include('main-navbar')
-    @yield('content-top')
-    @yield('content')
-    @yield('content-bottom')
+
     <notification />
 </div>
 @stack('footer-top')

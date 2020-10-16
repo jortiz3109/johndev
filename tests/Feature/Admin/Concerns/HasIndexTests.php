@@ -1,18 +1,11 @@
 <?php
 
-
 namespace Tests\Feature\Admin\Concerns;
-
 
 use Illuminate\Pagination\AbstractPaginator;
 
-trait HasIndex
+trait HasIndexTests
 {
-    public function testItReturnTheCorrectView()
-    {
-        $this->get(route($this->route()))->assertViewIs($this->view());
-    }
-
     public function testItHasACollection()
     {
         $response = $this->get(route($this->route()));
