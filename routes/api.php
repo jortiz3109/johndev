@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::as('api.admin.')->prefix('admin')->middleware('auth:api')->group(function () {
     Route::apiResource('posts', PostController::class)->except(['show']);
-    Route::post('posts/{post}/toggle-featured', [PostController::class, 'toggleFeatured'])->name('post.toggle-featured');
-    Route::post('posts/{post}/toggle-published', [PostController::class, 'togglePublished'])->name('post.toggle-published');
+    Route::post('posts/{post}/toggle-featured', [PostController::class, 'toggleFeatured'])->name('posts.toggle-featured');
+    Route::post('posts/{post}/toggle-published', [PostController::class, 'togglePublished'])->name('posts.toggle-published');
 });
