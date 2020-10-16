@@ -23,7 +23,8 @@ class PostController extends Controller
     public function index(): ResourceCollection
     {
         return new PostCollection(
-            Post::with('author:id,name,email')
+            Post::select(['id', 'title', 'slug', 'created_at', 'featured_at', 'published_at', 'user_id'])
+                ->with('author:id,name,email')
                 ->withCount('visits')
                 ->orderBy('id', 'DESC')
                 ->paginate()
@@ -40,7 +41,7 @@ class PostController extends Controller
     {
         $post = StoreOrUpdatePostAction::execute($request->validated());
 
-        return ApiResponse::dispatch(trans('Post created'), [
+        return ApiResponse::dispatch(trans('posts.messages.created'), [
             'links' => [
                 'show' => route('admin.posts.show', $post)
             ]
@@ -58,7 +59,7 @@ class PostController extends Controller
     {
         $post = StoreOrUpdatePostAction::execute($request->validated(), $post);
 
-        return ApiResponse::dispatch(trans('Post updated'), [
+        return ApiResponse::dispatch(trans('posts.messages.updated'), [
             'links' => [
                 'show' => route('admin.posts.show', $post)
             ]
@@ -83,7 +84,7 @@ class PostController extends Controller
         $post->toggleFeatured();
         $post->save();
 
-        $message = $post->isFeatured() ? trans('Post marked as featured') : trans('Post marked as not featured');
+        $message = $post->isFeatured() ? trans('posts.messages.featured') : trans('posts.messages.not-featured');
 
         return ApiResponse::dispatch($message, ['featured' => $post->isFeatured()]);
     }
@@ -93,7 +94,7 @@ class PostController extends Controller
         $post->togglePublished();
         $post->save();
 
-        $message = $post->isPublished() ? trans('Post published') : trans('Post unpublished');
+        $message = $post->isPublished() ? trans('posts.messages.published') : trans('posts.messages.not-published');
 
         return ApiResponse::dispatch($message, ['published' => $post->isPublished()]);
     }

@@ -21,6 +21,13 @@ return [
             'title' => 'Deleting post',
             'message' => 'Are you sure you want to delete this post? <br> This action cannot be undone.',
             'confirm' => 'Delete post',
-        ]
+        ],
+        'created' => 'Post created',
+        'deleted' => 'Post deleted',
+        'updated' => 'Post updated',
+        'featured' => 'Post marked as featured',
+        'not-featured' => 'Post marked as not featured',
+        'published' => 'Post published',
+        'not-published' => 'Post unpublished',
     ]
 ];
