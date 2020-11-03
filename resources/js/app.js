@@ -3,6 +3,10 @@ require('./buefy');
 require('./event-bus');
 require('./highlight');
 
+Vue.mixin(require('./mixins/trans'));
+Vue.mixin(require('./mixins/paths'));
+Vue.mixin(require('./mixins/errors'));
+
 window.axios.interceptors.response.use(
     function(response) {
         if (response.data.message) {
@@ -11,18 +15,14 @@ window.axios.interceptors.response.use(
         return response;
     },
     function(error) {
-        let errorMessage = 'An error occurred while processing your request';
-        if (error.response.data.message) {
-            errorMessage = error.response.data.message;
-        }
+        let errorMessage = ('response.data.message' in error)
+            ? error.response.data.message
+            : 'An error occurred while processing your request';
+
         eventBus.$emit('danger-notification-message', errorMessage);
         return Promise.reject(error.response);
     }
 );
-
-Vue.mixin(require('./mixins/trans'));
-Vue.mixin(require('./mixins/paths'));
-Vue.mixin(require('./mixins/errors'));
 
 import AdminPostsTableComponent from "./components/admin/posts/index/AdminPostsTableComponent";
 Vue.component('admin-posts-table', AdminPostsTableComponent);

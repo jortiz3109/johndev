@@ -1,6 +1,6 @@
 module.exports = {
     methods: {
-        __(key, replace) {
+        trans(key, replace) {
             let translation, translationNotFound = true
 
             try {

@@ -14,7 +14,7 @@ export default {
             required: true,
         },
         post: {
-            type: Number,
+            type: String,
             required: true,
         },
     },

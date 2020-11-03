@@ -1,19 +1,19 @@
 <template>
     <section>
-        <b-field :label="__('posts.publication_options')" a>
+        <b-field :label="trans('posts.publication_options')" a>
             <b-switch
                 :rounded="false"
                 v-model="published"
-                type="is-success">{{ __('posts.published') }}
+                type="is-success">{{ trans('posts.published') }}
             </b-switch>
             <b-switch
                 :rounded="false"
                 v-model="featured"
-                type="is-success">{{ __('posts.featured') }}
+                type="is-success">{{ trans('posts.featured') }}
             </b-switch>
         </b-field>
 
-        <b-field :label="__('posts.title')"
+        <b-field :label="trans('posts.title')"
                  :type="this.fieldType('title')"
                  :message="this.getError('title', this.errors)">
             <b-input type="text"
@@ -21,13 +21,13 @@
                      required/>
         </b-field>
 
-        <b-field :label="__('posts.body')"
+        <b-field :label="trans('posts.body')"
                  :type="this.fieldType('body')"
                  :message="this.getError('body', this.errors)">
             <div id="editor"></div>
         </b-field>
         <b-button @click="this.store" type="is-primary" expanded :loading="this.loading">
-            {{ this.__('common.actions.save') }}
+            {{ this.trans('common.actions.save') }}
         </b-button>
     </section>
 </template>

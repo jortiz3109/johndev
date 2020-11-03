@@ -16,19 +16,19 @@
         aria-current-label="Current page"
         icon-pack="fa">
 
-        <b-table-column field="title" :label="__('posts.title')" v-slot="props">
+        <b-table-column field="title" :label="trans('posts.title')" v-slot="props">
             {{ props.row.title }}
-            <div class="buttons are-small is-pulled-right">
+            <div class="buttons are-small is-pulled-right" :key="props.row.id">
                 <post-featured-tag :post="props.row.id" :featured="props.row.featured"></post-featured-tag>
                 <post-published-tag :post="props.row.id" :published="props.row.published"></post-published-tag>
             </div>
         </b-table-column>
 
-        <b-table-column field="author" width="200" :label="__('posts.author')" v-slot="props">
+        <b-table-column field="author" width="200" :label="trans('posts.author')" v-slot="props">
             {{ props.row.author.email }}
         </b-table-column>
 
-        <b-table-column field="created_at" width="120" :label="__('common.created_at')" v-slot="props">
+        <b-table-column field="created_at" width="120" :label="trans('common.created_at')" v-slot="props">
             {{ props.row.created_at }}
         </b-table-column>
 
