@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 @guest()
 @push('main-navbar-end')
     <div class="navbar-item">

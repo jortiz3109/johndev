@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 @push('main-navbar-start')
     <b-navbar-dropdown label="{{ __('admin.navbar.manage') }}" boxed collapsible>
         <b-navbar-item href="{{ route('admin.posts.index') }}">
