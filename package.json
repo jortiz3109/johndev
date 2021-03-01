@@ -22,7 +22,6 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
         "buefy": "^0.9.4",
-        "highlight.js": "^10.5.0",
         "jodit": "^3.6.2",
         "vue": "^2.6.12"
     }

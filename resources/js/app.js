@@ -1,7 +1,6 @@
 require('./bootstrap')
 require('./buefy')
 require('./event-bus')
-require('./highlight')
 
 Vue.mixin(require('./mixins/trans'))
 Vue.mixin(require('./mixins/paths'))
