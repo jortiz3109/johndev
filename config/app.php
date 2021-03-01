@@ -175,7 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyViewsServiceProvider::class,
-        App\Providers\TranslationServiceProvider::class
+        App\Providers\TranslationServiceProvider::class,
+        App\Providers\HtmlSanitizerProvider::class
 
     ],
 
