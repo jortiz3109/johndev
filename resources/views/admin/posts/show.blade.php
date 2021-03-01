@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @push('head')
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/monokai.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/atom-one-dark.min.css">
 @endpush
 @section('admin-content-top')
     <x-module-main-bar title="{{ $post->title }}">
@@ -36,14 +36,12 @@
     <div class="columns">
         <div class="column">
             <article>
-                <div class="content">
-                    {!! $post->body !!}
-                </div>
+                {!! $post->body !!}
             </article>
         </div>
     </div>
 @endsection
 @push('scripts')
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 @endpush
