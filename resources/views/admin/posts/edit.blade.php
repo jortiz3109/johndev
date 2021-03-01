@@ -1,21 +1,10 @@
 @extends('layouts.admin')
 @section('admin-content-top')
-    <x-module-main-bar title="{{ trans('posts.titles.edit') }}">
-        <x-slot name="right">
-            <div class="level-item">
-                <b-button
-                    tag="a"
-                    type="is-primary"
-                    icon-left="chevron-left"
-                    class="is-fullwidth"
-                    icon-pack="fas"
-                    href="{{ route('admin.posts.show', ['post' => $post['id']]) }}">
-                    @lang('common.actions.back')
-                </b-button>
-            </div>
-        </x-slot>
-    </x-module-main-bar>
+    @include('admin.partials.module_main_bar')
 @endsection
 @section('admin-content')
-    <admin-posts-edit :post="{{ json_encode($post) }}"/>
+    <form action="{{ $routes['action'] }}" method="POST" id="postForm">
+        @method('PUT')
+        @include('admin.posts.__form')
+    </form>
 @endsection

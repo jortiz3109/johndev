@@ -28,17 +28,15 @@
     </x-module-main-bar>
 @endsection
 @section('admin-content')
+    @include('admin.posts.show.__meta')
     @include('admin.posts.show.__categories', ['categories' => $post->categories])
     <div class="columns">
         <div class="column">
             <article>
                 <div class="content">
-                    {!! $post->parseBody() !!}
+                    {!! $post->body !!}
                 </div>
             </article>
-        </div>
-        <div class="column is-narrow-desktop">
-            @include('admin.posts.show.__meta')
         </div>
     </div>
 @endsection

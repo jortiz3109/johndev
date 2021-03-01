@@ -18,5 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WelcomeController::class, 'show']);
 
 Route::as('admin.')->prefix('admin')->middleware('auth')->group(function () {
-    Route::resource('posts', PostController::class)->except(['store', 'update', 'destroy']);
+    Route::resource('posts', PostController::class);
 });
