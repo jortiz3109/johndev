@@ -2,10 +2,9 @@
 
 namespace App\Actions\Posts;
 
+use App\Helpers\PostBodyHelper;
 use App\Models\Post;
-use HtmlSanitizer\Sanitizer;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 class StoreOrUpdatePostAction
@@ -21,7 +20,7 @@ class StoreOrUpdatePostAction
 
         $post->title = Arr::get($data, 'title');
         $post->slug = Str::slug(Arr::get($data, 'title'));
-        $post->body = App::make(Sanitizer::class)->sanitize(Arr::get($data, 'body'));
+        $post->body = PostBodyHelper::prepare(Arr::get($data, 'body'));
         $post->summary = Arr::get($data, 'summary');
         $post->published_at = Arr::has($data, 'published') ? now() : null;
         $post->featured_at = Arr::has($data, 'featured') ? now() : null;
