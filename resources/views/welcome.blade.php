@@ -20,59 +20,48 @@
 @endpush
 @endguest
 @section('content')
-    <section class="hero is-white is-medium">
+    <section class="hero is-dark is-large">
         <div class="hero-body">
-            <div class="container is-max-desktop">
-                <article class="media">
-                    <figure class="media-left">
-                        <p class="image is-128x128">
-                            <img src="{{ asset('images/logo.svg') }}">
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <h2 class="title is-1">
-                            {{ __('¡Welcome!') }}
-                        </h2>
-                        <p class="subtitle">
-                            I'm John Edisson Ortiz, lead developer at Evertec Medellín.
-                        </p>
+            <div class="container is-max-desktop has-text-centered" style="justify-content: center">
+                <figure class="image is-128x128 has-shadow is-inline-block mb-6">
+                    <img src="{{ asset('images/profile-pic.jpg') }}" class="is-rounded">
+                </figure>
+                <p class="title">
+                    John Edisson Ortiz
+                </p>
+                <p class="subtitle">
+                    @lang('Lead developer at Evertec Medellín.')
+                </p>
+                <div class="field is-grouped is-grouped-multiline" style="justify-content: center">
+                    <div class="control">
+                        <div class="tags is-large has-addons">
+                            <span class="tag is-white">
+                                <b-icon size="is-small" pack="fab" icon="github"></b-icon>
+                            </span>
+                            <span class="tag is-white"><a href="https://github.com/jortiz3109" target="_blank">jortiz3109</a></span>
+                        </div>
                     </div>
-                </article>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-white">
+                                <b-icon size="is-small" pack="fab" icon="linkedin"></b-icon>
+                            </span>
+                            <span class="tag is-white"><a href="https://www.linkedin.com/in/don-chiche/" target="_blank">John Edisson</a></span>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-white">
+                                <b-icon size="is-small" pack="fab" icon="twitter"></b-icon>
+                            </span>
+                            <span class="tag is-white"><a href="https://twitter.com/chiche" target="_blank">@chiche</a></span>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>
 @endsection
-@push('footer-top')
-    <section class="section has-background-dark-light">
-        <div class="container">
-            <div class="content">
-                <h1 class="title">@lang('Latest posts')</h1>
-                @foreach($posts as $post)
-                    <div class="box">
-                        <article class="media">
-                            <div class="media-left">
-                                <i class="fas fa-fw fa-cog fa-5x"></i>
-                            </div>
-                            <div class="media-content">
-                                <div class="content">
-                                    <h2 class="title">
-                                        <a href="{{ route('admin.posts.show', $post) }}">{{ $post->title }}</a>
-                                    </h2>
-                                    {{ $post->summary() }}
-                                </div>
-                                <div class="tags">
-                                        <span class="tag is-info">
-                                            <i class="fas fa-fw fa-envelope"></i> {{ $post->author->email }}
-                                        </span>
-                                    <span class="tag is-info">
-                                            <i class="fas fa-fw fa-calendar"></i> {{ $post->created_at->toDateString() }}
-                                        </span>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-@endpush

@@ -7,6 +7,7 @@
     </b-navbar-dropdown>
 @endpush
 @section('content-top')
+    @include('main-navbar')
     @yield('admin-content-top')
 @endsection
 @section('content')
