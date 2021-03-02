@@ -5,9 +5,26 @@
         </b-navbar-item>
     </template>
     <template slot="start">
+        <b-navbar-item href="{{ route('posts.index') }}">
+            @lang('Blog')
+        </b-navbar-item>
+        @auth()
+            <b-navbar-dropdown label="{{ __('admin.navbar.manage') }}" boxed collapsible>
+                <b-navbar-item href="{{ route('admin.posts.index') }}">
+                    {{ __('posts.titles.index') }}
+                </b-navbar-item>
+            </b-navbar-dropdown>
+        @endauth
         @stack('main-navbar-start')
     </template>
     <template slot="end">
+        @auth()
+            <b-navbar-dropdown label="{{ auth()->user()->name }}" boxed collapsible>
+                <b-navbar-item @click="$emit('auth:logout')">
+                    @lang('Logout')
+                </b-navbar-item>
+            </b-navbar-dropdown>
+        @endauth
         @stack('main-navbar-end')
     </template>
 </b-navbar>

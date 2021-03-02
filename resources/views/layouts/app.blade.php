@@ -6,29 +6,37 @@
 
     <title>{{ config('site.title') }}</title>
 
-    <!-- BULMA framework -->
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     @stack('head')
 </head>
-<body class="has-background-light">
+<body>
 <div id="app">
-    @include('main-navbar')
     @yield('content-top')
     @yield('content')
     @yield('content-bottom')
+    @auth()
+    <logout-component>
+        <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+            @csrf
+        </form>
+    </logout-component>
+    @endauth
+
     <notification />
 </div>
-<footer class="footer has-background-light">
-    <div class="content has-text-centered">
-        © {{ now()->year }} John Edisson Ortiz, All rights reserved
-    </div>
-</footer>
+@yield('footer')
 <script>
     window._locale = '{{ app()->getLocale() }}';
     window._translations = {!! cache('translations') !!};
+    window._sitePath = '{{ url('') }}';
+    window._apiPath = '{{ url('/api') }}';
+    @auth()
+    window._apiToken = '{{ auth()->user()->api_token }}';
+    @endauth
 </script>
 <script src="{{ asset(mix('js/manifest.js')) }}"></script>
 <script src="{{ asset(mix('js/vendor.js')) }}"></script>
 <script src="{{ asset(mix('js/app.js')) }}"></script>
+@stack('scripts')
 </body>
 </html>

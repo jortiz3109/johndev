@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Admin\PostCollection;
+use App\Http\Responses\ApiResponse;
 use App\Models\Post;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Http\Response;
 
 class PostController extends Controller
 {
@@ -20,41 +19,13 @@ class PostController extends Controller
      */
     public function index(): ResourceCollection
     {
-        return new PostCollection(Post::orderBy('position')->with('author:id,name,email')->withCount('visits')->paginate());
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        return new PostCollection(
+            Post::select(['id', 'title', 'slug', 'created_at', 'featured_at', 'published_at', 'user_id'])
+                ->with('author:id,name,email')
+                ->withCount('visits')
+                ->orderBy('id', 'DESC')
+                ->paginate()
+        );
     }
 
     /**
@@ -67,7 +38,7 @@ class PostController extends Controller
     public function destroy(Post $post): JsonResponse
     {
         $post->delete();
-        return response()->json(['message' => 'Post deleted successfully']);
+        return ApiResponse::dispatch(trans('Post deleted'));
     }
 
     public function toggleFeatured(Post $post): JsonResponse
@@ -75,12 +46,9 @@ class PostController extends Controller
         $post->toggleFeatured();
         $post->save();
 
-        $response = [
-            'message' => $post->isFeatured() ? trans('Post marked as featured') : trans('Post marked as not featured'),
-            'featured' => $post->isFeatured(),
-        ];
+        $message = $post->isFeatured() ? trans('posts.messages.featured') : trans('posts.messages.not-featured');
 
-        return response()->json($response);
+        return ApiResponse::dispatch($message, ['featured' => $post->isFeatured()]);
     }
 
     public function togglePublished(Post $post): JsonResponse
@@ -88,11 +56,8 @@ class PostController extends Controller
         $post->togglePublished();
         $post->save();
 
-        $response = [
-            'message' => $post->isPublished() ? trans('Post published') : trans('Post unpublished'),
-            'published' => $post->isPublished(),
-        ];
+        $message = $post->isPublished() ? trans('posts.messages.published') : trans('posts.messages.not-published');
 
-        return response()->json($response);
+        return ApiResponse::dispatch($message, ['published' => $post->isPublished()]);
     }
 }

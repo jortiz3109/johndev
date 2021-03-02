@@ -17,32 +17,14 @@ class PostCollection extends ResourceCollection
     {
         return $this->collection->map(function ($post) {
             return [
-                'id' => $post->id,
+                'id' => $post->getRouteKey(),
                 'title' => $post->title,
                 'author' => $post->author,
-                'summary' => $post->summary,
-                'created_at' => $post->created_at,
+                'created_at' => $post->created_at->toDateTimeString(),
                 'featured' => $post->isFeatured(),
                 'published' => $post->isPublished(),
                 'visits' => $post->visits_count,
             ];
         })->toArray();
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     */
-    public function with($request)
-    {
-        return [
-            'meta' => [
-                'texts' => [
-                    'delete' => [
-                        'button' => trans('common.delete')
-                    ],
-                ],
-            ],
-        ];
     }
 }

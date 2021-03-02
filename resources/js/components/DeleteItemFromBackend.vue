@@ -24,7 +24,6 @@ export default {
         delete() {
             axios.delete(this.route)
                 .then(({data}) => {
-                    eventBus.$emit('success-notification-message', data.message);
                     eventBus.$emit('item-deleted-successfully');
                 })
                 .catch((error) => {

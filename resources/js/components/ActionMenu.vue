@@ -7,8 +7,8 @@
             type="is-primary"
             icon-left="eye"
             icon-pack="fas"
-            :title="__('common.actions.show')"
-            outlined />
+            :title="trans('common.actions.show')"
+            inverted />
         <b-button
             tag="a"
             :href="this.editRoute"
@@ -16,45 +16,45 @@
             type="is-info"
             icon-left="edit"
             icon-pack="fas"
-            :title="__('common.actions.edit')"
-            outlined />
+            :title="trans('common.actions.edit')"
+            inverted />
         <b-button
             @click="this.destroy"
             size="is-small"
             type="is-danger"
             icon-left="trash"
             icon-pack="fas"
-            :title="__('common.actions.delete')"
-            outlined />
+            :title="trans('common.actions.delete')"
+            inverted />
     </div>
 </template>
 <script>
 export default {
     props: {
         post: {
-            type: Number,
+            type: String,
             required: true
         },
     },
     computed: {
         showRoute: function() {
-            return ['admin', 'posts', this.post].join('/');
+            return this.webRoute(`admin/posts/${this.post}`);
         },
         editRoute: function() {
-            return ['admin', 'posts', this.post, 'edit'].join('/');
+            return this.webRoute(`admin/posts/${this.post}/edit`);
         },
         deleteRoute: function() {
-            return ['api', 'admin', 'posts', this.post].join('/');
+            return this.apiRoute(`admin/posts/${this.post}`);
         },
     },
     methods: {
         destroy() {
             eventBus.$emit('delete-item', {
                 route: this.deleteRoute,
-                title: this.__('posts.messages.delete.title'),
-                message: this.__('posts.messages.delete.message'),
-                confirmText: this.__('posts.messages.delete.confirm'),
-                cancelText: this.__('common.actions.cancel'),
+                title: this.trans('posts.messages.delete.title'),
+                message: this.trans('posts.messages.delete.message'),
+                confirmText: this.trans('posts.messages.delete.confirm'),
+                cancelText: this.trans('common.actions.cancel'),
             });
         }
     }

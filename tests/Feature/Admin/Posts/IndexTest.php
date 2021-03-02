@@ -2,31 +2,25 @@
 
 namespace Tests\Feature\Admin\Posts;
 
-use App\Models\Post;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Feature\Admin\AdminIndexTestCase;
+use Tests\Feature\Admin\Concerns\HasAuthorizationTests;
+use Tests\Feature\Admin\Concerns\HasResponseTests;
+use Tests\TestCase;
 
-class IndexTest extends AdminIndexTestCase
+class IndexTest extends TestCase
 {
     use RefreshDatabase;
+    use HasAuthorizationTests;
+    use HasResponseTests;
+
+    protected function viewName(): string
+    {
+        return 'admin.posts.index';
+    }
 
     protected function route(): string
     {
-        return 'admin.posts.index';
-    }
-
-    protected function view(): string
-    {
-        return 'admin.posts.index';
-    }
-
-    protected function collection(): string
-    {
-        return 'posts';
-    }
-
-    protected function model(): string
-    {
-        return Post::class;
+        return route('admin.posts.index');
     }
 }

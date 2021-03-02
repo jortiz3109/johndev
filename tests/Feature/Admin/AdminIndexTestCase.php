@@ -3,11 +3,11 @@
 namespace Tests\Feature\Admin;
 
 use Tests\AdminTestCase;
-use Tests\Feature\Admin\Concerns\HasIndex;
+use Tests\Feature\Admin\Concerns\HasIndexTests;
 
 abstract class AdminIndexTestCase extends AdminTestCase
 {
-    use HasIndex;
+    use HasIndexTests;
 
     protected abstract function route(): string;
 

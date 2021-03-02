@@ -1,6 +1,6 @@
 module.exports = {
     methods: {
-        __(key, replace) {
+        trans(key, replace) {
             let translation, translationNotFound = true
 
             try {
@@ -19,7 +19,7 @@ module.exports = {
                     : key
             }
 
-            _.forEach(replace, (value, key) => {
+            _.forEach(replace, (value) => {
                 translation = translation.replace(':' + key, value)
             })
 
