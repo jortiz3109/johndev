@@ -2,11 +2,10 @@
 
 namespace App\View\ViewModels;
 
-use App\Contracts\FormViewModelContract;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class FormViewModel implements Arrayable
+abstract class ViewModel implements Arrayable
 {
     protected Model $model;
     public function __construct(Model $model)
