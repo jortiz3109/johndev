@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-use App\Helpers\PostBodyHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
-use Parsedown;
 
 /**
  * @property string title
@@ -30,7 +27,16 @@ class Post extends Model
         'featured_at',
     ];
 
-    public function getRouteKeyName()
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function($post){
+            $post->user_id = auth()->id();
+        });
+    }
+
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
