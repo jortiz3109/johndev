@@ -1,21 +1,22 @@
 <?php
 
-
 namespace App\Helpers;
 
-
-use Illuminate\Support\Str;
+use HtmlSanitizer\Sanitizer;
+use Illuminate\Support\Facades\App;
 
 class PostBodyHelper
 {
-    private const SUMMARY_DELIMITER = '=====';
-
-    public static function summary(string $text): string
+    public static function prepare(string $body): string
     {
-        $text = strip_tags($text);
+        $body = self::sanitize($body);
+        $body = str_replace('<pre>', '<pre class="has-code">', $body);
 
-        return Str::contains($text, self::SUMMARY_DELIMITER)
-            ? Str::substr($text, 0, strpos($text, self::SUMMARY_DELIMITER))
-            : Str::substr($text, 0, strpos($text, PHP_EOL));
+        return $body;
+    }
+
+    public static function sanitize(string $body): string
+    {
+        return App::make(Sanitizer::class)->sanitize($body);
     }
 }

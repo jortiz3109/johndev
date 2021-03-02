@@ -71,17 +71,4 @@ class Post extends Model
     {
         return (bool)$this->published_at;
     }
-
-    public function summary(): string
-    {
-        return PostBodyHelper::summary($this->attributes['body']);
-    }
-
-    public function parseBody(): string
-    {
-        $parseDown = new Parsedown();
-        $parseDown->setSafeMode(true);
-        $parseDown->setMarkupEscaped(true);
-        return $parseDown->text(Str::replaceFirst('=====', '', $this->attributes['body']));
-    }
 }

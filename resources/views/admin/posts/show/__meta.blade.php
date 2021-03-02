@@ -1,49 +1,40 @@
-<article class="message">
-    <div class="message-body">
-        <div class="content">
-            <p class="has-border-bottom is-border-dashed">
-                <b-tooltip label="@lang('posts.author')">
-                            <span class="mr-2">
-                                <b-icon size="is-small" pack="fas" icon="user" ></b-icon>
-                            </span>
-                </b-tooltip>
-                <span>{{ $post->author->name }}</span>
-            </p>
-            <p class="has-border-bottom is-border-dashed">
-                <b-tooltip label="@lang('common.email')">
-                            <span class="mr-2">
-                                <b-icon size="is-small" pack="fas" icon="envelope" ></b-icon>
-                            </span>
-                </b-tooltip>
-                <span>{{ $post->author->email }}</span></p>
-            <p class="has-border-bottom is-border-dashed">
-                <b-tooltip label="@lang('common.created_at')">
-                            <span class="mr-2">
-                                <b-icon size="is-small" pack="fas" icon="calendar" ></b-icon>
-                            </span>
-                </b-tooltip>
-                <span>{{ $post->created_at->toDateString() }}</span>
-            </p>
-            @if($post->isPublished())
-                <p class="has-border-bottom is-border-dashed">
-                    <b-tooltip label="@lang('posts.published_at')">
-                                <span class="mr-2">
-                                    <b-icon size="is-small" pack="fas" icon="check" ></b-icon>
-                                </span>
-                    </b-tooltip>
-                    <span>{{ $post->created_at->toDateString() }}</span>
-                </p>
-            @endif
-            @if($post->isFeatured())
-                <p class="has-border-bottom is-border-dashed">
-                    <b-tooltip label="@lang('posts.featured_at')">
-                                <span class="mr-2">
-                                    <b-icon size="is-small" pack="fas" icon="star" ></b-icon>
-                                </span>
-                    </b-tooltip>
-                    <span>{{ $post->featured_at->toDateString() }}</span>
-                </p>
-            @endif
-        </div>
+<div class="field is-grouped is-grouped-multiline">
+    <div class="control">
+        <span class="tags has-addons">
+            <span class="tag">
+                <b-icon size="is-small" pack="fas" icon="user"></b-icon>
+            </span>
+            <span class="tag">{{ $post->author->name }}</span>
+        </span>
     </div>
-</article>
+
+    <div class="control">
+        <span class="tags has-addons">
+            <span class="tag">
+                <b-icon size="is-small" pack="fas" icon="calendar"></b-icon>
+            </span>
+            <span class="tag">{{ $post->created_at->toDateString() }}</span>
+        </span>
+    </div>
+
+    @if($post->isPublished())
+        <div class="control">
+            <span class="tags has-addons">
+                <span class="tag">
+                    <b-icon size="is-small" pack="fas" icon="check"></b-icon>
+                </span>
+                <span class="tag">{{ $post->published_at->toDateString() }}</span>
+            </span>
+        </div>
+    @endif
+    @if($post->isFeatured())
+        <div class="control">
+            <span class="tags has-addons">
+                <span class="tag">
+                    <b-icon size="is-small" pack="fas" icon="star"></b-icon>
+                </span>
+                <span class="tag">{{ $post->featured_at->toDateString() }}</span>
+            </span>
+        </div>
+    @endif
+</div>

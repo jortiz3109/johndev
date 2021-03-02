@@ -12,7 +12,7 @@ class StorePostRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -22,13 +22,14 @@ class StorePostRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'title'     => ['required', 'min:5', 'max:120', Rule::unique('posts')],
-            'body'      => ['required'],
-            'published' => ['sometimes', 'boolean'],
-            'featured'  => ['sometimes', 'boolean'],
+            'summary'   => ['required', 'string', 'min:10', 'max:100'],
+            'body'      => ['required', 'filled'],
+            'published' => ['filled'],
+            'featured'  => ['filled']
         ];
     }
 }

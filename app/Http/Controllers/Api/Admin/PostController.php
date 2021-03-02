@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
-use App\Actions\Posts\StoreOrUpdatePostAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Posts\StorePostRequest;
-use App\Http\Requests\Posts\UpdatePostRequest;
 use App\Http\Resources\Api\Admin\PostCollection;
 use App\Http\Responses\ApiResponse;
 use App\Models\Post;
@@ -29,41 +26,6 @@ class PostController extends Controller
                 ->orderBy('id', 'DESC')
                 ->paginate()
         );
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param StorePostRequest $request
-     * @return JsonResponse
-     */
-    public function store(StorePostRequest $request): JsonResponse
-    {
-        $post = StoreOrUpdatePostAction::execute($request->validated());
-
-        return ApiResponse::dispatch(trans('posts.messages.created'), [
-            'links' => [
-                'show' => route('admin.posts.show', $post)
-            ]
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdatePostRequest $request
-     * @param Post $post
-     * @return JsonResponse
-     */
-    public function update(UpdatePostRequest $request, Post $post): JsonResponse
-    {
-        $post = StoreOrUpdatePostAction::execute($request->validated(), $post);
-
-        return ApiResponse::dispatch(trans('posts.messages.updated'), [
-            'links' => [
-                'show' => route('admin.posts.show', $post)
-            ]
-        ]);
     }
 
     /**

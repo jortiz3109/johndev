@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@push('head')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/atom-one-dark.min.css">
+@endpush
 @section('admin-content-top')
     <x-module-main-bar title="{{ $post->title }}">
         <x-slot name="right">
@@ -28,17 +31,17 @@
     </x-module-main-bar>
 @endsection
 @section('admin-content')
+    @include('admin.posts.show.__meta')
     @include('admin.posts.show.__categories', ['categories' => $post->categories])
     <div class="columns">
         <div class="column">
             <article>
-                <div class="content">
-                    {!! $post->parseBody() !!}
-                </div>
+                {!! $post->body !!}
             </article>
-        </div>
-        <div class="column is-narrow-desktop">
-            @include('admin.posts.show.__meta')
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+@endpush
