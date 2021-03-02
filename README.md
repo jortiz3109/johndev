@@ -76,7 +76,7 @@ Finally, create the database schema and basic data executing the following comma
 ```bash
 php artisan migrate --seed
 ```
-## 1.3.1 Creating admin user
+## Creating admin user
 
 To create the admin user and its role with all related permissions you could run the following code on tinker
 
