@@ -5,7 +5,7 @@
             <div class="box">
                 <article class="media">
                     <div class="media-left">
-                        <i class="fas fa-laptop fa-2x"></i>
+                        <em class="fas fa-laptop fa-2x"></em>
                     </div>
                     <div class="media-content">
                         <div class="content">
