@@ -2,9 +2,9 @@
 
 namespace App\View\ViewModels\Admin\Posts;
 
-use App\View\ViewModels\FormViewModel;
+use App\View\ViewModels\ViewModel;
 
-class EditViewModel extends FormViewModel
+class EditViewModel extends ViewModel
 {
 
     public function action(): string

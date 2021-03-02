@@ -3,9 +3,9 @@
 namespace App\View\ViewModels\Admin\Posts;
 
 use App\Models\Post;
-use App\View\ViewModels\FormViewModel;
+use App\View\ViewModels\ViewModel;
 
-class CreateViewModel extends FormViewModel
+class CreateViewModel extends ViewModel
 {
     public function __construct()
     {
