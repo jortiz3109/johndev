@@ -1,8 +1,6 @@
 <?php
 
-
-namespace Tests\Feature\Api\Concerns;
-
+namespace Tests\Feature\Admin\Concerns;
 
 use App\Models\User;
 
@@ -17,11 +15,11 @@ trait HasValidationTests
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user, 'api')->json($this->method, $this->route(), [
+        $response = $this->actingAs($user)->{$this->method}($this->route(), [
             $field => $value
         ]);
 
-        $response->assertStatus(422);
-        $response->assertJsonValidationErrors($field);
+        $response->assertRedirect();
+        $response->assertSessionHasErrors($field);
     }
 }
