@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\PostController as GuestPostController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [WelcomeController::class, 'show']);
+
+Route::name('posts.index')->get('posts', [GuestPostController::class, 'index']);
+Route::name('posts.show')->get('posts/{post}', [GuestPostController::class, 'show']);
 
 Route::as('admin.')->prefix('admin')->middleware('auth')->group(function () {
     Route::resource('posts', PostController::class);

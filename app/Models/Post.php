@@ -71,4 +71,9 @@ class Post extends Model
     {
         return (bool)$this->published_at;
     }
+
+    public function relativeCreationDate(): string
+    {
+        return now()->diffForHumans($this->created_at);
+    }
 }
