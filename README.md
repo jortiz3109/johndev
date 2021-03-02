@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/jortiz3109/johndev.svg?branch=master)](https://travis-ci.org/jortiz3109/johndev)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=jortiz3109_johndev&metric=security_rating)](https://sonarcloud.io/dashboard?id=jortiz3109_johndev)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jortiz3109_johndev&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=jortiz3109_johndev)
+
 # Laravel Blog
 
 This is a simple app for blogging.
