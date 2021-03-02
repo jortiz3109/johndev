@@ -19,7 +19,7 @@ module.exports = {
                     : key
             }
 
-            _.forEach(replace, (value, key) => {
+            _.forEach(replace, (value) => {
                 translation = translation.replace(':' + key, value)
             })
 
