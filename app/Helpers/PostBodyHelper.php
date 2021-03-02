@@ -10,9 +10,8 @@ class PostBodyHelper
     public static function prepare(string $body): string
     {
         $body = self::sanitize($body);
-        $body = str_replace('<pre>', '<pre class="has-code">', $body);
 
-        return $body;
+        return str_replace('<pre>', '<pre class="has-code">', $body);
     }
 
     public static function sanitize(string $body): string

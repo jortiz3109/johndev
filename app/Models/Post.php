@@ -19,6 +19,7 @@ use Parsedown;
  * @property Carbon|null published_at
  * @property Carbon|null featured_at
  * @property string slug
+ * @method static orderBy(string $string, string $string1)
  */
 class Post extends Model
 {

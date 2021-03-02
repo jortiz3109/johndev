@@ -10,42 +10,44 @@ use App\Models\Post;
 use App\View\ViewModels\Admin\Posts\CreateViewModel;
 use App\View\ViewModels\Admin\Posts\EditViewModel;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
+use Illuminate\Http\Response;
 
 class PostController extends Controller
 {
-    public function index(): View
-    {
-        $posts = Post::paginate();
+    private const SHOW_ROUTE = 'admin.posts.show';
 
-        return view('admin.posts.index', compact('posts'));
+    public function index(): Response
+    {
+        $posts = Post::orderBy('id', 'desc')->paginate();
+
+        return response()->view('admin.posts.index', compact('posts'));
     }
 
-    public function show(Post $post): View
+    public function show(Post $post): Response
     {
         $post->load('categories', 'author:id,name,email');
-        return view('admin.posts.show', compact('post'));
+        return response()->view(self::SHOW_ROUTE, compact('post'));
     }
 
-    public function create(CreateViewModel $viewModel): View
+    public function create(CreateViewModel $viewModel): Response
     {
-        return view('admin.posts.create', $viewModel->toArray());
+        return response()->view('admin.posts.create', $viewModel->toArray());
     }
 
     public function store(StorePostRequest $request): RedirectResponse
     {
         $post = StoreOrUpdatePostAction::execute($request->validated());
-        return redirect()->route('admin.posts.show', $post);
+        return redirect()->route(self::SHOW_ROUTE, $post);
     }
 
-    public function edit(Post $post): View
+    public function edit(Post $post): Response
     {
-        return view('admin.posts.edit', (new EditViewModel($post))->toArray());
+        return response()->view('admin.posts.edit', (new EditViewModel($post))->toArray());
     }
 
     public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
         $post = StoreOrUpdatePostAction::execute($request->validated(), $post);
-        return redirect()->route('admin.posts.show', $post);
+        return redirect()->route(self::SHOW_ROUTE, $post);
     }
 }
