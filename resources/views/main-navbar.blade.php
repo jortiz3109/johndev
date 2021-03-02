@@ -5,9 +5,16 @@
         </b-navbar-item>
     </template>
     <template slot="start">
-        <b-navbar-item href="{{ url('') }}">
+        <b-navbar-item href="{{ route('posts.index') }}">
             @lang('Blog')
         </b-navbar-item>
+        @auth()
+            <b-navbar-dropdown label="{{ __('admin.navbar.manage') }}" boxed collapsible>
+                <b-navbar-item href="{{ route('admin.posts.index') }}">
+                    {{ __('posts.titles.index') }}
+                </b-navbar-item>
+            </b-navbar-dropdown>
+        @endauth
         @stack('main-navbar-start')
     </template>
     <template slot="end">

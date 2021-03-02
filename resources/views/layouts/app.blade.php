@@ -11,7 +11,6 @@
 </head>
 <body>
 <div id="app">
-    @include('main-navbar')
     @yield('content-top')
     @yield('content')
     @yield('content-bottom')

@@ -1,78 +1,43 @@
 @extends('layouts.main')
-@guest()
-@push('main-navbar-end')
-    <div class="navbar-item">
-        <a href="{{ config('site.links.github') }}" class="button is-white">
-            <span class="icon is-small"><i class="fab fa-github"></i></span>
-        </a>
-    </div>
-    <div class="navbar-item">
-        <a href="{{ config('site.links.twitter') }}" class="button is-white">
-            <span class="icon is-small"><i class="fab fa-twitter"></i></span>
-        </a>
-    </div>
-    <div class="navbar-item">
-        <a href="{{ url('') }}" class="button is-info">
-            <span class="icon is-small"><i class="fas fa-envelope"></i></span>
-            <span>@lang('Contact me')</span>
-        </a>
-    </div>
-@endpush
-@endguest
 @section('content')
-    <section class="hero is-white is-medium">
+    <section class="hero is-dark is-medium">
         <div class="hero-body">
-            <div class="container is-max-desktop">
-                <article class="media">
-                    <figure class="media-left">
-                        <p class="image is-128x128">
-                            <img src="{{ asset('images/logo.svg') }}">
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <h2 class="title is-1">
-                            {{ __('¡Welcome!') }}
-                        </h2>
-                        <p class="subtitle">
-                            I'm John Edisson Ortiz, lead developer at Evertec Medellín.
-                        </p>
-                    </div>
-                </article>
+            <div class="container is-max-desktop has-text-centered" style="justify-content: center">
+                <figure class="image is-128x128 has-shadow is-inline-block mb-6">
+                    <img src="{{ asset('images/profile-pic.jpg') }}" alt="Me" class="is-rounded">
+                </figure>
+                <p class="title">
+                    John Edisson Ortiz
+                </p>
+                <p class="subtitle">
+                    @lang('Lead developer at Evertec Medellín.')
+                </p>
+                <b-button
+                    tag="a"
+                    type="is-primary"
+                    icon-left="book-reader"
+                    icon-pack="fas"
+                    href="{{ route('posts.index') }}">
+                    Blog
+                </b-button>
             </div>
         </div>
+        <div class="hero-foot">
+            <nav class="tabs is-centered">
+                <div class="container is-max-desktop">
+                    <ul>
+                        @foreach(config('site.social') as $network => $data)
+                        <li>
+                            <a href="{{ $data['link'] }}">
+                                <span class="icon is-small"><i class="fab fa-{{ $network }}" aria-hidden="true"></i></span>
+                                <span>{{ $data['text'] }}</span>
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </section>
     </section>
 @endsection
-@push('footer-top')
-    <section class="section has-background-dark-light">
-        <div class="container">
-            <div class="content">
-                <h1 class="title">@lang('Latest posts')</h1>
-                @foreach($posts as $post)
-                    <div class="box">
-                        <article class="media">
-                            <div class="media-left">
-                                <i class="fas fa-fw fa-cog fa-5x"></i>
-                            </div>
-                            <div class="media-content">
-                                <div class="content">
-                                    <h2 class="title">
-                                        <a href="{{ route('admin.posts.show', $post) }}">{{ $post->title }}</a>
-                                    </h2>
-                                    {{ $post->summary() }}
-                                </div>
-                                <div class="tags">
-                                        <span class="tag is-info">
-                                            <i class="fas fa-fw fa-envelope"></i> {{ $post->author->email }}
-                                        </span>
-                                    <span class="tag is-info">
-                                            <i class="fas fa-fw fa-calendar"></i> {{ $post->created_at->toDateString() }}
-                                        </span>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-@endpush

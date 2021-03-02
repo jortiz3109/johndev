@@ -1,12 +1,6 @@
 @extends('layouts.main')
-@push('main-navbar-start')
-    <b-navbar-dropdown label="{{ __('admin.navbar.manage') }}" boxed collapsible>
-        <b-navbar-item href="{{ route('admin.posts.index') }}">
-            {{ __('posts.titles.index') }}
-        </b-navbar-item>
-    </b-navbar-dropdown>
-@endpush
 @section('content-top')
+    @include('main-navbar')
     @yield('admin-content-top')
 @endsection
 @section('content')
