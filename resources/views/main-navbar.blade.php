@@ -1,4 +1,4 @@
-<b-navbar type="is-white" wrapper-class="container is-max-desktop" :transparent="true">
+<b-navbar type="is-white" wrapper-class="container" :transparent="true">
     <template slot="brand">
         <b-navbar-item href="{{ url('') }}">
             <img src="{{ asset('images/logo.svg') }}" alt="{{ config('site.title') }}">

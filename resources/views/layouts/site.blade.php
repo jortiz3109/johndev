@@ -1,10 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.main')
 @section('content-top')
-    @include('main-navbar')
-    @yield('site-content-top')
+    <div class="container">
+        @include('main-navbar')
+        @yield('site-content-top')
+    </div>
 @endsection
 @section('content')
     <section class="section has-background-dark">
-        @yield('site-content')
+        <div class="container">
+            @yield('site-content')
+        </div>
     </section>
 @endsection

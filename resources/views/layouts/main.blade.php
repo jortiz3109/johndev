@@ -1,4 +1,20 @@
 @extends('layouts.app')
+@section('main')
+    <div id="app">
+        @yield('content-top')
+        @yield('content')
+        @yield('content-bottom')
+        @auth()
+            <logout-component>
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                </form>
+            </logout-component>
+        @endauth
+
+        <notification />
+    </div>
+@endsection
 @section('footer')
     @stack('footer-top')
     <footer class="footer">
