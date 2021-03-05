@@ -13,10 +13,14 @@ export default {
         config: {
             type: Object,
             default: () => ({
-                "uploader": {
-                    "insertImageAsBase64URI": true
+                uploader: {
+                    insertImageAsBase64URI: true
                 },
-                "toolbarButtonSize": "small"
+                toolbarButtonSize: "small",
+                beautifyHTML: false,
+                showBrowserColorPicker: false,
+                showPlaceholder: false,
+                removeButtons: ['font', 'color', 'clipboard']
             })
         }
     },

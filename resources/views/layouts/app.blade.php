@@ -10,33 +10,12 @@
     @stack('head')
 </head>
 <body>
-<div id="app">
-    @yield('content-top')
-    @yield('content')
-    @yield('content-bottom')
-    @auth()
-    <logout-component>
-        <form id="logoutForm" action="{{ route('logout') }}" method="POST">
-            @csrf
-        </form>
-    </logout-component>
-    @endauth
-
-    <notification />
-</div>
+@yield('main')
 @yield('footer')
-<script>
-    window._locale = '{{ app()->getLocale() }}';
-    window._translations = {!! cache('translations') !!};
-    window._sitePath = '{{ url('') }}';
-    window._apiPath = '{{ url('/api') }}';
-    @auth()
-    window._apiToken = '{{ auth()->user()->api_token }}';
-    @endauth
-</script>
+@stack('scripts-top')
 <script src="{{ asset(mix('js/manifest.js')) }}"></script>
 <script src="{{ asset(mix('js/vendor.js')) }}"></script>
 <script src="{{ asset(mix('js/app.js')) }}"></script>
-@stack('scripts')
+@stack('scripts-bottom')
 </body>
 </html>
