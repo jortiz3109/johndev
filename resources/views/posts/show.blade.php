@@ -1,6 +1,6 @@
 @extends('layouts.site')
 @push('head')
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="{{ asset('enlighter/enlighterjs.min.css') }}" />
 @endpush
 @section('site-content')
     <div class="box">
@@ -30,7 +30,14 @@
     </div>
     </section>
 @endsection
-@push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js" integrity="sha512-zol3kFQ5tnYhL7PzGt0LnllHHVWRGt2bTCIywDiScVvLIlaDOVJ6sPdJTVi0m3rA660RT+yZxkkRzMbb1L8Zkw==" crossorigin="anonymous"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+@push('scripts-bottom')
+    <script type="text/javascript" src="{{ asset('enlighter/enlighterjs.min.js') }}"></script>
+
+    <script type="text/javascript">
+        EnlighterJS.init('pre', 'code', {
+            theme: 'droide',
+            textOverflow: 'scroll',
+            indent : 4
+        });
+    </script>
 @endpush
