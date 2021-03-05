@@ -1,6 +1,6 @@
-@extends('layouts.main')
-@section('content')
-    <section class="hero is-dark is-large">
+@extends('layouts.app')
+@section('main')
+    <section class="hero is-dark is-fullheight" id="app">
         <div class="hero-body">
             <div class="container is-max-desktop has-text-centered" style="justify-content: center">
                 <figure class="image is-128x128 has-shadow is-inline-block mb-6">
