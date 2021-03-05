@@ -7,7 +7,7 @@ return [
         'show' => 'Ver',
         'edit' => 'Editar',
         'delete' => 'Eliminar',
-        'back' => 'Atrás',
+        'back' => 'Atras',
         'save' => 'Guardar',
     ],
     'name' => 'Nombre',
