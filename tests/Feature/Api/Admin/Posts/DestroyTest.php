@@ -31,6 +31,7 @@ class DestroyTest extends TestCase
     public function testItCanDeleteAPost()
     {
         $user = User::factory()->create();
+        app()->setLocale('en');
 
         $response = $this->actingAs($user, 'api')->json($this->method, $this->route());
 

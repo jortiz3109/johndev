@@ -12,7 +12,7 @@
                             <a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a>
                         </p>
                         <p class="subtitle is-size-6">
-                            <strong>{{ $post->author->name }}</strong> {{ $post->author->email }}{{ $post->relativeCreationDate() }}
+                            <strong>{{ $post->author->name }}</strong> {{ $post->author->email }} - {{ $post->relativeCreationDate() }}
                         </p>
                         <p>{{ $post->summary }}</p>
                     </div>
