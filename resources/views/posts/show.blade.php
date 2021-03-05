@@ -1,5 +1,7 @@
 @extends('layouts.site')
 @push('head')
+    @include('posts.show.meta.og')
+    @include('posts.show.meta.twitter')
     <link rel="stylesheet" href="{{ asset('enlighter/enlighterjs.min.css') }}" />
 @endpush
 @section('site-content')
