@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tests\Feature\Admin\Posts\Concerns;
-
 
 use App\Models\Post;
 
@@ -18,7 +16,7 @@ trait HasPost
 
     protected function models()
     {
-        Post::withoutEvents(function (){
+        Post::withoutEvents(function () {
             Post::factory()->count(40)->create();
         });
     }

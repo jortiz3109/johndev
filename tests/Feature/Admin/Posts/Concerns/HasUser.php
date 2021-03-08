@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tests\Feature\Admin\Posts\Concerns;
-
 
 use App\Models\Author;
 use App\Models\User;

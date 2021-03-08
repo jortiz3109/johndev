@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\Feature\Admin\Authors;
 
 use App\Models\Author;

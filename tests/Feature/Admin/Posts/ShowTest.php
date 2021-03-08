@@ -8,7 +8,6 @@ use Tests\Feature\Admin\Posts\Concerns\HasUser;
 
 class ShowTest extends AdminShowTestCase
 {
-
     use HasPost;
     use HasUser;
 

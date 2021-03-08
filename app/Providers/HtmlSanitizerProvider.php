@@ -11,7 +11,7 @@ class HtmlSanitizerProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->bind(Sanitizer::class, function($app, $params) {
+        $this->app->bind(Sanitizer::class, function ($app, $params) {
             $extensions = Arr::get($params, 'extensions', config('html-sanitizer.extensions'));
             $tags = Arr::get($params, 'tags', config('html-sanitizer.tags'));
 

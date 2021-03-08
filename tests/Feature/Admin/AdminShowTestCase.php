@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tests\Feature\Admin;
-
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
