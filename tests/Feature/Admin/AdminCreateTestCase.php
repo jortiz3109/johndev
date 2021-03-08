@@ -3,24 +3,21 @@
 namespace Tests\Feature\Admin;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\Admin\Concerns\HasAuthorizationTests;
-use Tests\Feature\Admin\Concerns\HasIndexTests;
-use Tests\Feature\Admin\Concerns\HasResponseData;
 use Tests\Feature\Admin\Concerns\HasResponseTests;
 use Tests\TestCase;
 
-abstract class AdminIndexTestCase extends TestCase
+abstract class AdminCreateTestCase extends TestCase
 {
     use RefreshDatabase;
-    use HasAuthorizationTests;
     use HasResponseTests;
-    use HasIndexTests;
-    use HasResponseData;
+    use HasAuthorizationTests;
+    
+    abstract protected function model(): Model;
 
-    abstract protected function models();
-
-    abstract protected function collectionName(): string;
+    abstract protected function modelName(): string;
 
     abstract protected function viewName(): string;
 

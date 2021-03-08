@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 
 /**
@@ -18,6 +18,9 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null featured_at
  * @property string slug
  * @method static orderBy(string $string, string $string1)
+ * @method static where(string $string, $id)
+ * @method static first()
+ * @method static select(string[] $array)
  */
 class Post extends Model
 {
@@ -32,8 +35,8 @@ class Post extends Model
     {
         parent::boot();
 
-        self::creating(function($post){
-            $post->user_id = auth()->id();
+        self::creating(function ($post) {
+            $post->author_id = auth()->user()->author->id;
         });
     }
 
@@ -44,10 +47,7 @@ class Post extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id')->withDefault([
-            'name' => 'Anonymous',
-            'email' => 'me@johndev.co',
-        ]);
+        return $this->belongsTo(Author::class);
     }
 
     public function categories(): BelongsToMany

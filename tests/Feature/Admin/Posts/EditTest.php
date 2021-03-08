@@ -2,30 +2,19 @@
 
 namespace Tests\Feature\Admin\Posts;
 
-use App\Models\Post;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Feature\Admin\Concerns\HasResponseTests;
-use Tests\Feature\Admin\Concerns\HasAuthorizationTests;
-use Tests\TestCase;
+use Tests\Feature\Admin\AdminEditTestCase;
+use Tests\Feature\Admin\Posts\Concerns\HasPost;
+use Tests\Feature\Admin\Posts\Concerns\HasUser;
 
-class EditTest extends TestCase
+class EditTest extends AdminEditTestCase
 {
-    use RefreshDatabase;
-    use HasResponseTests;
-    use HasAuthorizationTests;
-
-    private Model $post;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->post = Post::factory()->create();
-    }
+    use HasUser;
+    use HasPost;
 
     protected function route(): string
     {
-        return route('admin.posts.edit', $this->post);
+        $post = $this->model();
+        return route('admin.posts.edit', $post);
     }
 
     protected function viewName(): string

@@ -3,27 +3,18 @@
 namespace Tests\Feature\Admin\Posts;
 
 use App\Models\Post;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\Feature\Admin\Concerns\HasValidationTests;
-use Tests\Feature\Admin\Concerns\HasAuthorizationTests;
-use Tests\Feature\Admin\Posts\Concerns\HasValidationProviders;
-use Tests\TestCase;
+use Tests\Feature\Admin\AdminStoreTestCase;
+use Tests\Feature\Admin\Posts\Concerns\HasPost;
+use Tests\Feature\Admin\Posts\Concerns\HasUser;
 
-class StoreTest extends TestCase
+class StoreTest extends AdminStoreTestCase
 {
-    use RefreshDatabase;
-    use WithFaker;
-    use HasAuthorizationTests;
-    use HasValidationTests;
-    use HasValidationProviders;
-
-    private string $method = 'post';
+    use HasPost;
+    use HasUser;
 
     public function testItStoresAPost()
     {
-        $user = User::factory()->create();
+        $user = $this->user();
         $data = [
             'title' => $this->faker->words(2, true),
             'summary' => $this->faker->words(3, true),
@@ -36,9 +27,14 @@ class StoreTest extends TestCase
         $response->assertRedirect(route('admin.posts.show', $post));
     }
 
+    protected function route(): string
+    {
+        return route('admin.posts.store');
+    }
+
     public function testItStoresTheAuthorOfAPost()
     {
-        $user = User::factory()->create();
+        $user = $this->user();
         $data = [
             'title' => $this->faker->words(2, true),
             'summary' => $this->faker->words(3, true),
@@ -48,13 +44,13 @@ class StoreTest extends TestCase
         $this->actingAs($user)->post($this->route(), $data);
         $post = Post::first();
 
-        $this->assertSame($user->id, $post->author->id);
+        $this->assertSame($user->author->id, $post->author_id);
     }
 
     public function testItCannotStoreANotUniquePost()
     {
-        $user = User::factory()->create();
-        $post = Post::factory()->create();
+        $user = $this->user();
+        $post = $this->model();
         $data = [
             'title' => $post->title,
             'summary' => $this->faker->words(3, true),
@@ -64,11 +60,5 @@ class StoreTest extends TestCase
         $response = $this->actingAs($user)->post($this->route(), $data);
 
         $response->assertSessionHasErrors('title');
-
-    }
-
-    protected function route(): string
-    {
-        return route('admin.posts.store');
     }
 }

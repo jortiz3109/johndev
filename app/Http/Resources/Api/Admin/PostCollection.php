@@ -13,7 +13,7 @@ class PostCollection extends ResourceCollection
      * @param Request $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return $this->collection->map(function ($post) {
             return [

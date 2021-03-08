@@ -25,7 +25,7 @@ class PostController extends Controller
 
     public function show(Post $post): Response
     {
-        $post->load('categories', 'author:id,name,email');
+        $post->load('categories', 'author:id,user_id', 'author.user:id,name,email');
         return response()->view(self::SHOW_ROUTE, compact('post'));
     }
 

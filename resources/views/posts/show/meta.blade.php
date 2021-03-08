@@ -4,7 +4,7 @@
             <span class="tag">
                 <b-icon size="is-small" pack="fas" icon="user"></b-icon>
             </span>
-            <span class="tag">{{ $post->author->name }}</span>
+            <span class="tag">{{ $post->author->user->name }}</span>
         </span>
     </div>
 

@@ -3,9 +3,10 @@
 namespace Tests\Feature\Api\Admin\Posts;
 
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\Feature\Admin\Posts\Concerns\HasPost;
+use Tests\Feature\Admin\Posts\Concerns\HasUser;
 use Tests\Feature\Api\Concerns\HasAuthorizationTests;
 use Tests\TestCase;
 
@@ -14,34 +15,39 @@ class IndexTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
     use HasAuthorizationTests;
+    use HasPost;
+    use HasUser;
 
     private string $method = 'GET';
+
+    public function testItCanListPosts()
+    {
+        $post = $this->model();
+        $user = $this->user();
+
+        $response = $this->actingAs($user, 'api')->getJson($this->route());
+
+        $response->assertJsonPath('posts.0.id', $post->slug);
+        $response->assertJsonPath('posts.0.title', $post->title);
+        $response->assertJsonPath('posts.0.author.user.name', $post->author->user->name);
+        $response->assertJsonPath('posts.0.author.user.email', $post->author->user->email);
+        $response->assertJsonPath('posts.0.created_at', $post->created_at->toDateTimeString());
+        $response->assertJsonPath('posts.0.featured', $post->isFeatured());
+        $response->assertJsonPath('posts.0.published', $post->isPublished());
+    }
 
     protected function route(array $params = []): string
     {
         return route('api.admin.posts.index', $params);
     }
 
-    public function testItCanListPosts()
-    {
-        $post = Post::factory()->create();
-        $user = User::factory()->create();
-
-        $response = $this->actingAs($user, 'api')->getJson($this->route());
-
-        $response->assertJsonPath('posts.0.id', $post->slug);
-        $response->assertJsonPath('posts.0.title', $post->title);
-        $response->assertJsonPath('posts.0.author.name', $post->author->name);
-        $response->assertJsonPath('posts.0.author.email', $post->author->email);
-        $response->assertJsonPath('posts.0.created_at', $post->created_at->toDateTimeString());
-        $response->assertJsonPath('posts.0.featured', $post->isFeatured());
-        $response->assertJsonPath('posts.0.published', $post->isPublished());
-    }
-
     public function testItCanPaginatePosts()
     {
-        Post::factory()->count(45)->create();
-        $user = User::factory()->create();
+        Post::withoutEvents(function () {
+            Post::factory()->count(45)->create();
+        });
+
+        $user = $this->user();
 
         $response = $this->actingAs($user, 'api')->getJson($this->route(['page' => 2]));
 

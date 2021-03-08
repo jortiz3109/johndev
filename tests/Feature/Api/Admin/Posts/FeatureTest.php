@@ -3,9 +3,9 @@
 namespace Tests\Feature\Api\Admin\Posts;
 
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Tests\Feature\Admin\Posts\Concerns\HasPost;
+use Tests\Feature\Admin\Posts\Concerns\HasUser;
 use Tests\Feature\Api\Concerns\HasAuthorizationTests;
 use Tests\TestCase;
 
@@ -13,20 +13,15 @@ class FeatureTest extends TestCase
 {
     use RefreshDatabase;
     use HasAuthorizationTests;
+    use HasPost;
+    use HasUser;
 
     private Post $post;
     private string $method = 'POST';
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->post = Post::factory()->create();
-    }
-
     public function testItCanFeatureAPost()
     {
-        $user = User::factory()->create();
+        $user = $this->user();
 
         $response = $this->actingAs($user, 'api')->json($this->method, $this->route());
 
@@ -38,9 +33,14 @@ class FeatureTest extends TestCase
         ]);
     }
 
+    private function route(): string
+    {
+        return route('api.admin.posts.toggle-featured', $this->post);
+    }
+
     public function testItCanUnFeatureAPost()
     {
-        $user = User::factory()->create();
+        $user = $this->user();
         $this->post->toggleFeatured();
         $this->post->save();
 
@@ -54,8 +54,10 @@ class FeatureTest extends TestCase
         ]);
     }
 
-    private function route(): string
+    protected function setUp(): void
     {
-        return route('api.admin.posts.toggle-featured', $this->post);
+        parent::setUp();
+
+        $this->post = $this->model();
     }
 }

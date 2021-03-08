@@ -2,42 +2,31 @@
 
 namespace Tests\Feature\Admin\Posts;
 
-use App\Models\Post;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Feature\Admin\Concerns\HasAuthorizationTests;
-use Tests\Feature\Admin\Concerns\HasResponseTests;
-use Tests\TestCase;
+use Tests\Feature\Admin\AdminShowTestCase;
+use Tests\Feature\Admin\Posts\Concerns\HasPost;
+use Tests\Feature\Admin\Posts\Concerns\HasUser;
 
-class ShowTest extends TestCase
+class ShowTest extends AdminShowTestCase
 {
-    use HasAuthorizationTests;
-    use HasResponseTests;
-    use RefreshDatabase;
 
-    private Model $post;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->post = Post::factory()->create();
-    }
-
-    private function route(): string
-    {
-        return route('admin.posts.show', $this->post);
-    }
-
-    private function viewName(): string
-    {
-        return 'admin.posts.show';
-    }
+    use HasPost;
+    use HasUser;
 
     public function testItShowPostData()
     {
-        $user = User::factory()->create();
+        $user = $this->user();
         $response = $this->actingAs($user)->get($this->route());
         $response->assertOk();
+    }
+
+    protected function route(): string
+    {
+        $post = $this->model();
+        return route('admin.posts.show', $post);
+    }
+
+    protected function viewName(): string
+    {
+        return 'admin.posts.show';
     }
 }

@@ -20,8 +20,8 @@ class PostController extends Controller
     public function index(): ResourceCollection
     {
         return new PostCollection(
-            Post::select(['id', 'title', 'slug', 'created_at', 'featured_at', 'published_at', 'user_id'])
-                ->with('author:id,name,email')
+            Post::select(['id', 'title', 'slug', 'created_at', 'featured_at', 'published_at', 'author_id'])
+                ->with(['author:id,user_id', 'author.user:id,name,email'])
                 ->withCount('visits')
                 ->orderBy('id', 'DESC')
                 ->paginate()

@@ -2,17 +2,14 @@
 
 namespace Tests\Feature\Admin\Posts;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Feature\Admin\Concerns\HasAuthorizationTests;
-use Tests\Feature\Admin\Concerns\HasResponseTests;
-use Tests\TestCase;
+use Tests\Feature\Admin\AdminCreateTestCase;
+use Tests\Feature\Admin\Posts\Concerns\HasPost;
+use Tests\Feature\Admin\Posts\Concerns\HasUser;
 
-class CreateTest extends TestCase
+class CreateTest extends AdminCreateTestCase
 {
-    use RefreshDatabase;
-    use HasResponseTests;
-    use HasAuthorizationTests;
-
+    use HasPost;
+    use HasUser;
 
     protected function route(): string
     {

@@ -8,28 +8,19 @@ trait HasIndexTests
 {
     public function testItHasACollection()
     {
-        $response = $this->get(route($this->route()));
+        $user = $this->user();
+        $response = $this->actingAs($user)->get($this->route());
 
-        $response->assertViewHas($this->collection());
+        $response->assertViewHas($this->collectionName());
     }
 
     public function testItHasAPaginator()
     {
-        $response = $this->get(route($this->route()));
+        $user = $this->user();
+        $response = $this->actingAs($user)->get($this->route());
 
-        $collection = $this->getDataItem($response, $this->collection());
+        $collection = $this->getDataItem($response, $this->collectionName());
 
         $this->assertInstanceOf(AbstractPaginator::class, $collection);
-    }
-
-    public function testItHasACollectionOfCorrectModels()
-    {
-        $modelName = $this->model();
-        $modelName::factory()->create();
-
-        $response = $this->get(route($this->route()));
-        $collection = $this->getDataItem($response, $this->collection());
-
-        $this->assertInstanceOf($this->model(), $collection->first());
     }
 }

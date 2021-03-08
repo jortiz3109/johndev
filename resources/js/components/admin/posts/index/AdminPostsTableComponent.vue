@@ -25,7 +25,7 @@
         </b-table-column>
 
         <b-table-column field="author" width="200" :label="trans('posts.author')" v-slot="props">
-            {{ props.row.author.email }}
+            {{ props.row.author.user.email }}
         </b-table-column>
 
         <b-table-column field="created_at" width="120" :label="trans('common.created_at')" v-slot="props">

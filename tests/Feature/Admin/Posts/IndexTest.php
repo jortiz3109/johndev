@@ -2,17 +2,14 @@
 
 namespace Tests\Feature\Admin\Posts;
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Feature\Admin\Concerns\HasAuthorizationTests;
-use Tests\Feature\Admin\Concerns\HasResponseTests;
-use Tests\TestCase;
+use Tests\Feature\Admin\AdminIndexTestCase;
+use Tests\Feature\Admin\Posts\Concerns\HasPost;
+use Tests\Feature\Admin\Posts\Concerns\HasUser;
 
-class IndexTest extends TestCase
+class IndexTest extends AdminIndexTestCase
 {
-    use RefreshDatabase;
-    use HasAuthorizationTests;
-    use HasResponseTests;
+    use HasPost;
+    use HasUser;
 
     protected function viewName(): string
     {

@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Author;
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
@@ -22,7 +22,7 @@ class PostFactory extends Factory
             'slug' => $this->faker->slug,
             'summary' => $this->faker->words(5, true),
             'body' => $bodyHtml,
-            'user_id' => User::factory(),
+            'author_id' => Author::factory(),
         ];
     }
 }
