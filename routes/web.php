@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\PostController as GuestPostController;
 use App\Http\Controllers\WelcomeController;
@@ -23,4 +24,5 @@ Route::name('posts.show')->get('posts/{post}', [GuestPostController::class, 'sho
 
 Route::as('admin.')->prefix('admin')->middleware('auth')->group(function () {
     Route::resource('posts', PostController::class);
+    Route::resource('authors', AuthorController::class);
 });

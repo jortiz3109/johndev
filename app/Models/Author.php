@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static create(array $array)
+ * @method static select(string $string, string $string1, string $string2)
  * @property int id
+ * @property User user
+ * @property string about
+ * @property string avatar
+ * @property int user_id
  */
 class Author extends Model
 {
@@ -19,5 +24,15 @@ class Author extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getNameAttribute(): ?string
+    {
+        return $this->user->name ?? null;
+    }
+
+    public function getEmailAttribute(): ?string
+    {
+        return $this->user->email ?? null;
     }
 }

@@ -11,6 +11,10 @@ use Illuminate\Notifications\Notifiable;
 /**
  * @method static select(string $string)
  * @property Author author
+ * @property string name
+ * @property string email
+ * @property string password
+ * @property int id
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

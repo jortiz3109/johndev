@@ -50,6 +50,9 @@ Vue.component('logout-component', LogoutComponent)
 import EditorComponent from "./components/EditorComponent"
 Vue.component('editor', EditorComponent)
 
+import UploadComponent from "./components/UploadComponent"
+Vue.component('upload', UploadComponent)
+
 const app = new Vue({
     el: '#app',
     mounted() {

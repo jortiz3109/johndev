@@ -19,7 +19,7 @@ class AuthorFactory extends Factory
     public function definition(): array
     {
         return [
-            'avatar' => Storage::get('stubs/default-author-avatar.svg'),
+            'avatar' => 'data:image/svg+xml;utf8,' . Storage::get('stubs/default-author-avatar.svg'),
             'about' => $this->faker->words(5, true),
             'user_id' => User::factory(),
         ];

@@ -7,27 +7,17 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAuthorsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->binary('avatar')->nullable();
             $table->mediumText('about')->nullable();
-            $table->foreignIdFor(User::class)->unique();
+            $table->foreignIdFor(User::class)->constrained()->unique();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('authors');

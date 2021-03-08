@@ -27,4 +27,6 @@ abstract class AdminIndexTestCase extends TestCase
     abstract protected function user(): User;
 
     abstract protected function route(): string;
+
+    abstract public function fieldsProvider(): array;
 }

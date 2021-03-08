@@ -1,24 +1,24 @@
 <?php
 
-namespace Tests\Feature\Admin\Posts;
+namespace Tests\Feature\Admin\Authors;
 
 use Tests\Feature\Admin\AdminIndexTestCase;
-use Tests\Feature\Admin\Posts\Concerns\HasPost;
+use Tests\Feature\Admin\Authors\Concerns\HasAuthor;
 use Tests\Feature\Admin\Posts\Concerns\HasUser;
 
 class IndexTest extends AdminIndexTestCase
 {
-    use HasPost;
     use HasUser;
+    use HasAuthor;
 
     protected function viewName(): string
     {
-        return 'admin.posts.index';
+        return 'admin.authors.index';
     }
 
     protected function route(): string
     {
-        return route('admin.posts.index');
+        return route('admin.authors.index');
     }
 
     public function fieldsProvider(): array
