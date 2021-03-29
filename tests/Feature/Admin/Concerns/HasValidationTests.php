@@ -15,9 +15,9 @@ trait HasValidationTests
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->{$this->method}($this->route(), [
-            $field => $value
-        ]);
+        $data = array_merge($this->data(), [$field => $value]);
+
+        $response = $this->actingAs($user)->{$this->method}($this->route(), $data);
 
         $response->assertRedirect();
         $response->assertSessionHasErrors($field);

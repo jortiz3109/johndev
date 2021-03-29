@@ -23,6 +23,6 @@ class IndexTest extends AdminIndexTestCase
 
     public function fieldsProvider(): array
     {
-        return [];
+        return [['name'], ['email']];
     }
 }

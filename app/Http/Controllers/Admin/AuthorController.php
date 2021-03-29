@@ -6,6 +6,7 @@ use App\Actions\Authors\StoreOrUpdateAuthorAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Authors\StoreAuthorRequest;
 use App\Models\Author;
+use App\View\ViewModels\Admin\Authors\EditViewModel;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\View\ViewModels\Admin\Authors\CreateViewModel;
@@ -29,29 +30,37 @@ class AuthorController extends Controller
     {
         $author = StoreOrUpdateAuthorAction::execute($request->validated());
 
-        dd($author);
+        return redirect()->route('admin.authors.show', $author);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Author $author
+     * @return View
      */
-    public function show($id)
+    public function show(Author $author): View
     {
-        //
+        $author->loadCount('posts');
+        $posts = $author
+            ->posts()
+            ->orderBy('id', 'DESC')
+            ->select('id', 'title', 'slug', 'created_at')
+            ->take(5)
+            ->get();
+
+        return view('admin.authors.show', compact('author', 'posts'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Author $author
+     * @return View
      */
-    public function edit($id)
+    public function edit(Author $author): View
     {
-        //
+        return view('admin.authors.edit', (new EditViewModel($author))->toArray());
     }
 
     /**
@@ -61,7 +70,7 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Author $author)
     {
         //
     }

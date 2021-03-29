@@ -32,9 +32,14 @@
                 <td>
                     <img class="image is-rounded is-24x24" src="{{ $author->avatar }}" alt="@lang('author.avatar_for', ['name', $author->name])">
                 </td>
-                <td>{{ $author->name }}</td>
+                <td>
+                    <a href="{{ route('admin.authors.show', $author) }}">{{ $author->name }}</a>
+                </td>
                 <td>{{ $author->email }}</td>
-                <td></td></tr>
+                <td class="has-text-right">
+                    @include('admin.authors.partials.actions', ['author' => $author])
+                </td>
+            </tr>
         @endforeach
         </tbody>
     </table>

@@ -8,7 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\Feature\Admin\Concerns\HasAuthorizationTests;
 use Tests\Feature\Admin\Concerns\HasValidationTests;
-use Tests\Feature\Admin\Posts\Concerns\HasValidationProviders;
 use Tests\TestCase;
 
 abstract class AdminStoreTestCase extends TestCase
@@ -17,7 +16,6 @@ abstract class AdminStoreTestCase extends TestCase
     use WithFaker;
     use HasAuthorizationTests;
     use HasValidationTests;
-    use HasValidationProviders;
 
     protected string $method = 'post';
 
@@ -28,4 +26,8 @@ abstract class AdminStoreTestCase extends TestCase
     abstract protected function user(): User;
 
     abstract protected function route(): string;
+
+    abstract public function validationDataProvider(): array;
+
+    abstract protected function data(): array;
 }

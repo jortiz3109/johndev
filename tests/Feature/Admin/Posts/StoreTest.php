@@ -6,11 +6,13 @@ use App\Models\Post;
 use Tests\Feature\Admin\AdminStoreTestCase;
 use Tests\Feature\Admin\Posts\Concerns\HasPost;
 use Tests\Feature\Admin\Posts\Concerns\HasUser;
+use Tests\Feature\Admin\Posts\Concerns\HasValidationProviders;
 
 class StoreTest extends AdminStoreTestCase
 {
     use HasPost;
     use HasUser;
+    use HasValidationProviders;
 
     public function testItStoresAPost()
     {

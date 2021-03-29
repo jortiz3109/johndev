@@ -1,5 +1,5 @@
 <template>
-    <b-button @click="checkValidity()" type="is-primary" native-type="submit" expanded :loading="this.loading">
+    <b-button @click="checkValidity()" icon-pack="fas" icon-left="save" type="is-primary" native-type="submit" expanded :loading="this.loading">
         <slot/>
     </b-button>
 </template>

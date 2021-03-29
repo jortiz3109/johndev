@@ -13,12 +13,6 @@ module.exports = {
                 translation = key
             }
 
-            if (translationNotFound) {
-                translation = window._translations[window._locale]['json'][key]
-                    ? window._translations[window._locale]['json'][key]
-                    : key
-            }
-
             _.forEach(replace, (value) => {
                 translation = translation.replace(':' + key, value)
             })

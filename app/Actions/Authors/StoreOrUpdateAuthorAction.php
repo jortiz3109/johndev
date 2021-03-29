@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class StoreOrUpdateAuthorAction
 {
@@ -18,6 +19,7 @@ class StoreOrUpdateAuthorAction
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
+        $user->api_token = Str::random(80);
         $user->save();
 
         $author->about = $data['about'];

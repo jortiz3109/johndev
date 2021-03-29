@@ -15,6 +15,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string email
  * @property string password
  * @property int id
+ * @property string api_token
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

@@ -13,6 +13,9 @@
                 <b-navbar-item href="{{ route('admin.posts.index') }}">
                     {{ __('posts.titles.index') }}
                 </b-navbar-item>
+                <b-navbar-item href="{{ route('admin.authors.index') }}">
+                    {{ __('authors.titles.index') }}
+                </b-navbar-item>
             </b-navbar-dropdown>
         @endauth
         @stack('main-navbar-start')

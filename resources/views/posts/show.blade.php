@@ -25,9 +25,11 @@
             @include('posts.show.meta')
             @include('posts.show.categories', ['categories' => $post->categories])
             <article>
-                <p>{{ $post->summary }}</p>
+                <blockquote>{{ $post->summary }}</blockquote>
                 {!! $post->body !!}
             </article>
+            <hr>
+            @include('posts.show.author')
         </div>
     </div>
     </section>

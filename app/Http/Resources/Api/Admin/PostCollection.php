@@ -19,7 +19,9 @@ class PostCollection extends ResourceCollection
             return [
                 'id' => $post->getRouteKey(),
                 'title' => $post->title,
-                'author' => $post->author,
+                'author' => [
+                    'name' => $post->author->name
+                ],
                 'created_at' => $post->created_at->toDateTimeString(),
                 'featured' => $post->isFeatured(),
                 'published' => $post->isPublished(),
